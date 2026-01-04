@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Users, Award, MapPin, Sparkles, Calendar, Clock } from 'lucide-react';
 import TourCard from '../components/TourCard';
@@ -11,9 +11,23 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Testimonials from '../components/Testimonials';
 import FeaturedTours from '../components/FeaturedTours';
+import nubaLuxuryEscapeImg2 from '../assets/nuba luxury escape2.jpeg';
 
 const Home = () => {
   const featuredTours = getFeaturedTours();
+  const specialTrip = getSpecialTrip();
+  const [currentImage, setCurrentImage] = useState(specialTrip?.image || '');
+
+  useEffect(() => {
+    if (!specialTrip) return;
+    const images = [specialTrip.image, nubaLuxuryEscapeImg2];
+    let index = 0;
+    const interval = setInterval(() => {
+      index = (index + 1) % images.length;
+      setCurrentImage(images[index]);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [specialTrip]);
   
   return (
     <div className="bg-white">
@@ -80,43 +94,39 @@ const Home = () => {
       </section>
 
       {/* Special Trip Section - Nuba Experience */}
-      {(() => {
-        const specialTrip = getSpecialTrip();
-        if (!specialTrip) return null;
-        
-        return (
-          <section className="py-20 bg-gradient-to-br from-orange-50 via-white to-amber-50 relative overflow-hidden">
-            {/* Background Decorative Elements */}
-            <div className="absolute inset-0">
-              <div className="absolute top-10 left-10 w-64 h-64 bg-orange-200 rounded-full opacity-20 blur-3xl animate-pulse"></div>
-              <div className="absolute bottom-10 right-10 w-80 h-80 bg-amber-200 rounded-full opacity-20 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      {specialTrip && (
+        <section className="py-20 bg-gradient-to-br from-orange-50 via-white to-amber-50 relative overflow-hidden">
+          {/* Background Decorative Elements */}
+          <div className="absolute inset-0">
+            <div className="absolute top-10 left-10 w-64 h-64 bg-orange-200 rounded-full opacity-20 blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-10 right-10 w-80 h-80 bg-amber-200 rounded-full opacity-20 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* Header */}
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-amber-600 text-white px-6 py-3 rounded-full mb-6 shadow-lg">
+                <Sparkles className="w-5 h-5" />
+                <span className="font-bold text-lg">Special Trip</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                Nuba Experience
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                A unique Nubian experience on a traditional Dahabya - Discover authentic Nubian culture
+              </p>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              {/* Header */}
-              <div className="text-center mb-12">
-                <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-amber-600 text-white px-6 py-3 rounded-full mb-6 shadow-lg">
-                  <Sparkles className="w-5 h-5" />
-                  <span className="font-bold text-lg">Special Trip</span>
-                </div>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-                  Nuba Experience
-                </h2>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                  A unique Nubian experience on a traditional Dahabya - Discover authentic Nubian culture
-                </p>
-              </div>
-
-              {/* Main Content Card */}
-              <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border-4 border-orange-200 hover:border-orange-400 transition-all duration-300 transform hover:scale-[1.01]">
-                <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-0 lg:items-center">
-                  {/* Image Section */}
-                  <div className="relative h-96 lg:h-full min-h-[400px] lg:min-h-[480px] overflow-hidden">
-                    <img 
-                      src={specialTrip.image} 
-                      alt={specialTrip.title}
-                      className="w-full h-full object-cover"
-                    />
+            {/* Main Content Card */}
+            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border-4 border-orange-200 hover:border-orange-400 transition-all duration-300 transform hover:scale-[1.01]">
+              <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-0 lg:items-center">
+                {/* Image Section */}
+                <div className="relative h-96 lg:h-full min-h-[400px] lg:min-h-[480px] overflow-hidden">
+                  <img 
+                    src={currentImage} 
+                    alt={specialTrip.title}
+                    className="w-full h-full object-cover transition-opacity duration-1000"
+                  />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                     
                     {/* Badges */}
@@ -213,8 +223,7 @@ const Home = () => {
               </div>
             </div>
           </section>
-        );
-      })()}
+        )}
 
       {/* Featured Tours Section */}
       <FeaturedTours />
