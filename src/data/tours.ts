@@ -11,7 +11,7 @@ import img10 from '../assets/pyramids.jpg';
 import img11 from '../assets/fluca luxor.jpg';
 import nubaImg from '../assets/Nuba.jpg';
 import nubaNewYearsImg from '../assets/31DEC.png';
-import nubaLuxuryEscapeImg from '../assets/nuba luxury escape.jpg';
+import nubaLuxuryEscapeImg from '../assets/nuba luxury escape.jpeg';
 import galleryImg1 from '../assets/1.jpg';
 import galleryImg2 from '../assets/2.jpg';
 import galleryImg3 from '../assets/3.jpg';
