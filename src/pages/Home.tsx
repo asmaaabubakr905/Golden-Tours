@@ -12,7 +12,8 @@ import 'swiper/css/pagination';
 import Testimonials from '../components/Testimonials';
 import FeaturedTours from '../components/FeaturedTours';
 import nubaLuxuryEscapeImg2 from '../assets/nuba luxury escape2.jpeg';
-import nubaLuxuryEscapeImg3 from '../assets/nuba luxury escape3.jpg';
+import nubaLuxuryEscapeImg3 from '../assets/nuba luxury escape3.jfif';
+import nubaLuxuryEscapeImg4 from '../assets/nuba luxury escape4.jfif';
 
 const Home = () => {
   const featuredTours = getFeaturedTours();
@@ -21,7 +22,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!specialTrip) return;
-    const images = [specialTrip.image, nubaLuxuryEscapeImg2, nubaLuxuryEscapeImg3];
+    const images = [specialTrip.image, nubaLuxuryEscapeImg2, nubaLuxuryEscapeImg3, nubaLuxuryEscapeImg4];
     let index = 0;
     const interval = setInterval(() => {
       index = (index + 1) % images.length;
