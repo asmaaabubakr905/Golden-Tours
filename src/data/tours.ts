@@ -11,6 +11,7 @@ import img10 from '../assets/pyramids.jpg';
 import img11 from '../assets/fluca luxor.jpg';
 import nubaImg from '../assets/Nuba.jpg';
 import nubaNewYearsImg from '../assets/31DEC.png';
+import nubaLuxuryEscapeImg from '../assets/nuba luxury escape.jpg';
 import galleryImg1 from '../assets/1.jpg';
 import galleryImg2 from '../assets/2.jpg';
 import galleryImg3 from '../assets/3.jpg';
@@ -39,6 +40,8 @@ export interface Tour {
   maxGuests: number;
   featured?: boolean;
   special?: boolean;
+  isNewYear?: boolean;
+  tourDate?: string;
   itinerary: string[];
   includes: string[];
   excludes: string[];
@@ -540,7 +543,7 @@ export const tours: Tour[] = [
   {
     id: '13',
     title: 'Nuba - New Years',
-    description: 'Celebrate New Year’s Eve on a Dahabya in Nubia — culture, nature, and parties along the Nile.',
+    description: "Celebrate New Year's Eve on a Dahabya in Nubia — culture, nature, and parties along the Nile.",
     image: nubaNewYearsImg,
     price: 11500,
     duration: '4 days',
@@ -549,7 +552,8 @@ export const tours: Tour[] = [
     rating: 5.0,
     maxGuests: 20,
     featured: true,
-    special: true,
+    special: false,
+    isNewYear: true,
     itinerary: [
       'Day 1',
       'Arrival to Aswan & pick-up from train station',
@@ -557,7 +561,7 @@ export const tours: Tour[] = [
       'Visit Nubian houses and see crocodiles (tea & pie provided)',
       'Buy Nubian galabeya and customs for the party',
       'Premium dinner on the Kendaka Nubain House',
-      'New Year’s Party ',
+      "New Year's Party ",
       '',
       'Day 2',
       'Breakfast on the Dahabya',
@@ -593,7 +597,7 @@ export const tours: Tour[] = [
       'All activities mentioned',
       'All meals and drinks mentioned (all dinners on the Dahabya)',
       'Nubian Party "Galabeya"',
-      'New Year’s Party',
+      "New Year's Party",
       'All tickets and permits required for the activities'
     ],
     excludes: [
@@ -605,7 +609,94 @@ export const tours: Tour[] = [
       'Kayaking',
       'Tips'
     ],
-    fullDescription: 'Nuba, located in Upper Egypt, is an enchanting destination for its rich cultural heritage and stunning natural landscapes. Discover the magic of Nubia and the grandeur of Abu Simbel — a journey through ancient temples, vibrant culture, and timeless landscapes along the Nile. Highlights include Philae Temple, visiting Nubian houses to watch crocodiles, Heissa Island, sunset from a secret spot, exploring local markets, Nubian Galabeya party, hidden gems, Abu Hawa Mountain hike, and shopping. The trip runs on 31/12 with New Year\'s celebrations on board the Dahabya.',
+    fullDescription: "Nuba, located in Upper Egypt, is an enchanting destination for its rich cultural heritage and stunning natural landscapes. Discover the magic of Nubia and the grandeur of Abu Simbel — a journey through ancient temples, vibrant culture, and timeless landscapes along the Nile. Highlights include Philae Temple, visiting Nubian houses to watch crocodiles, Heissa Island, sunset from a secret spot, exploring local markets, Nubian Galabeya party, hidden gems, Abu Hawa Mountain hike, and shopping. The trip runs on 31/12 with New Year's celebrations on board the Dahabya.",
+    galleryImages: [
+      galleryImg1,
+      galleryImg2,
+      galleryImg3,
+      galleryImg4,
+      galleryImg5,
+      galleryImg6,
+      galleryImg7,
+      galleryImg8,
+      galleryImg9,
+      galleryImg10,
+      galleryImg11,
+      galleryImg12,
+      galleryImg13,
+      galleryImg14
+    ]
+  },
+  {
+    id: '14',
+    title: 'ASWAN – NUBA LUXURY ESCAPE',
+    description: 'Dahabya Experience - A unique Nubian luxury escape on a traditional Dahabya. Discover authentic Nubian culture in an exceptional 4-day journey.',
+    image: nubaLuxuryEscapeImg,
+    price: 9800,
+    duration: '4 days',
+    location: 'Aswan',
+    city: 'Aswan',
+    rating: 5.0,
+    maxGuests: 20,
+    featured: true,
+    special: true,
+    tourDate: '28th-31th January',
+    itinerary: [
+      'DAY 1 – ARRIVAL & NUBIAN VIBES',
+      'Arrival in Aswan and private pick-up from the train station',
+      'Check-in on the Dahabya and time to rest',
+      'Special camel ride around the Nubian village',
+      'Visit traditional Nubian houses and see crocodiles (tea and pie included)',
+      'Shopping for Nubian Galabeya and accessories for the party',
+      'Private Nubian Galabeya party on the Dahabya deck',
+      'Premium dinner at Kendaka Nubian House',
+      '',
+      'DAY 2 – TEMPLES & ISLAND MOOD',
+      'Breakfast on the Dahabya',
+      'Private boat trip to Philae Temple',
+      'Guided visit to Philae Temple',
+      'Exploring hidden gems of Hesa Nubian Island',
+      'Premium dinner with a panoramic view of Philae Temple',
+      'Board games and relaxing evening on the Dahabya',
+      '',
+      'DAY 3 – ADVENTURE MODE',
+      'Breakfast on the Dahabya',
+      'Felucca ride to Abu Hawa Mountain',
+      'Hiking and photos from the highest point in Aswan',
+      'Sailing boat on the Nile River',
+      'Kayaking on the Nile (optional)',
+      'Visit to Mafia Island',
+      'Sandboarding experience',
+      'Premium dinner on the Dahabya',
+      'Free time and shopping in old souq',
+      '',
+      'DAY 4 – DEPARTURE',
+      'Breakfast',
+      'Luxor Hot Air Balloon (optional)',
+      'Abu Simbel visit (optional)',
+      'Check-out',
+      'Drop-off at the train station'
+    ],
+    includes: [
+      'Golden tours team [Local]',
+      'Accommodation on a fixed Dahabya',
+      'Half Board meals',
+      'Internal transportation in Nuba (cars & boats)',
+      'All meals mentioned ',
+      'Nubian Party "Galabeya"',
+      'All tickets and permits required for the activities'
+    ],
+    excludes: [
+      'Talgo train tickets',
+      'Tips',
+      'Drinks',
+      'Luxor hot-air ballon overday ',
+      'Abu Simbel',
+      'Kayak ',
+      'Personal expenses',
+      'Nubian party custom'
+    ],
+    fullDescription: 'Nuba, located in Upper Egypt, is an enchanting destination for its rich cultural heritage and stunning natural landscapes. Discover the magic of Nubia and the grandeur of Abu Simbel — a journey through ancient temples, vibrant culture, and timeless landscapes along the Nile. Highlights include Philae Temple, visiting Nubian houses to watch crocodiles, Hesa Island, sunset from a secret spot, exploring local markets, Nubian Galabeya party, hidden gems, Abu Hawa Mountain hike, and shopping. Experience luxury on a traditional Dahabya with premium accommodations and authentic Nubian experiences.',
     galleryImages: [
       galleryImg1,
       galleryImg2,

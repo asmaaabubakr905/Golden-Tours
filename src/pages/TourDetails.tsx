@@ -35,13 +35,13 @@ const TourDetails = () => {
     setActiveTab(tour.special ? 'itinerary' : 'overview');
   }, [tour?.id]);
 
-  // One-time New Year celebration overlay for special trips (e.g., New Year)
+  // One-time New Year celebration overlay for New Year trips only
   useEffect(() => {
-    if (!tour?.special) return;
+    if (!tour?.isNewYear) return;
     setShowCelebration(true);
     const timer = setTimeout(() => setShowCelebration(false), 4200);
     return () => clearTimeout(timer);
-  }, [tour?.id, tour?.special]);
+  }, [tour?.id, tour?.isNewYear]);
 
   // Keyboard navigation for image gallery
   useEffect(() => {
@@ -183,8 +183,8 @@ const TourDetails = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      {/* New Year Celebration Overlay (shows once on load for special trips) */}
-      {showCelebration && tour?.special && (
+      {/* New Year Celebration Overlay (shows once on load for New Year trips only) */}
+      {showCelebration && tour?.isNewYear && (
         <div className="fixed inset-0 z-40 pointer-events-none overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-orange-500/15 via-amber-200/15 to-transparent animate-pulse"></div>
           <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
@@ -553,6 +553,12 @@ const TourDetails = () => {
                 <Clock className="w-5 h-5" />
                 <span>{tour.duration}</span>
               </div>
+              {/* {tour.tourDate && (
+                <div className="flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">
+                  <Calendar className="w-5 h-5" />
+                  <span className="font-semibold">{tour.tourDate}</span>
+                </div>
+              )} */}
               <div className="flex items-center space-x-2">
                 <Star className="w-5 h-5 text-yellow-400 fill-current" />
                 <span>{tour.rating} ({reviewsCount} reviews)</span>
@@ -641,21 +647,28 @@ const TourDetails = () => {
                       {(() => {
                         let itemNumber = 0;
                         return tour.itinerary.map((item, index) => {
-                          // Check if item is a day header (Day X)
-                          const isDayHeader = /^Day \d+$/i.test(item.trim());
+                          // Check if item is a day header (Day X or DAY X with optional text)
+                          const dayHeaderMatch = item.trim().match(/^(DAY|Day)\s+(\d+)(?:\s*[–-]\s*(.+))?$/i);
                           const isEmpty = item.trim() === '';
                           
                           if (isEmpty) {
                             return null;
                           }
                           
-                          if (isDayHeader) {
+                          if (dayHeaderMatch) {
+                            const dayNumber = dayHeaderMatch[2];
+                            const dayText = dayHeaderMatch[3] || '';
                             return (
                               <div key={index} className="mt-6 mb-4">
                                 <div className="flex items-center space-x-3">
                                   <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-orange-500 to-amber-600 text-white rounded-xl flex items-center justify-center text-lg font-bold shadow-lg">
-                                    {item}
+                                    Day {dayNumber}
                                   </div>
+                                  {dayText && (
+                                    <div className="text-sm font-semibold text-gray-700 mr-2">
+                                      {dayText}
+                                    </div>
+                                  )}
                                   <div className="flex-1 h-0.5 bg-gradient-to-r from-orange-200 to-transparent"></div>
                                 </div>
                               </div>
@@ -747,6 +760,12 @@ const TourDetails = () => {
                 </div>
 
                 <div className="space-y-4 mb-6">
+                  {tour.tourDate && (
+                    <div className="flex items-center justify-between py-2 border-b border-orange-100 bg-orange-50 px-4 py-3 rounded-lg">
+                      <span className="text-gray-700 flex items-center font-semibold"><Calendar className="w-4 h-4 mr-1 text-orange-500" />Tour Date</span>
+                      <span className="font-bold text-orange-600">{tour.tourDate}</span>
+                    </div>
+                  )}
                   <div className="flex items-center justify-between py-2 border-b border-orange-100">
                     <span className="text-gray-600 flex items-center"><Clock className="w-4 h-4 mr-1 text-orange-400" />Duration</span>
                     <span className="font-medium">{tour.duration}</span>
