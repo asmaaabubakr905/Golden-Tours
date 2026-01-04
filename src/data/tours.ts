@@ -675,7 +675,9 @@ export const tours: Tour[] = [
       'Luxor Hot Air Balloon (optional)',
       'Abu Simbel visit (optional)',
       'Check-out',
-      'Drop-off at the train station'
+      'Drop-off at the train station',
+      'Foreigners extra supplement 110 Usd',
+      'single room extra supplement 3.5k egp'
     ],
     includes: [
       'Golden tours team [Local]',

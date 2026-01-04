@@ -650,9 +650,18 @@ const TourDetails = () => {
                           // Check if item is a day header (Day X or DAY X with optional text)
                           const dayHeaderMatch = item.trim().match(/^(DAY|Day)\s+(\d+)(?:\s*[–-]\s*(.+))?$/i);
                           const isEmpty = item.trim() === '';
+                          const isSupplement = item.trim().startsWith('Foreigners extra supplement') || item.trim().startsWith('single room extra supplement');
                           
                           if (isEmpty) {
                             return null;
+                          }
+                          
+                          if (isSupplement) {
+                            return (
+                              <div key={index} className="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg shadow-sm">
+                                <p className="text-yellow-800 font-medium text-sm">{item}</p>
+                              </div>
+                            );
                           }
                           
                           if (dayHeaderMatch) {
