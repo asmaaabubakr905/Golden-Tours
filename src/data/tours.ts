@@ -12,20 +12,24 @@ import img11 from '../assets/fluca luxor.jpg';
 import nubaImg from '../assets/Nuba.jpg';
 import nubaNewYearsImg from '../assets/31DEC.png';
 import nubaLuxuryEscapeImg from '../assets/nuba luxury escape.jpeg';
-import galleryImg1 from '../assets/1.jpg';
+import galleryImg1 from '../assets/1.jfif';
 import galleryImg2 from '../assets/2.jpg';
 import galleryImg3 from '../assets/3.jpg';
-import galleryImg4 from '../assets/4.jpg';
 import galleryImg5 from '../assets/5.jpg';
 import galleryImg6 from '../assets/6.jpg';
 import galleryImg7 from '../assets/7.jpg';
 import galleryImg8 from '../assets/8.jpg';
-import galleryImg9 from '../assets/9.jpg';
+import galleryImg9 from '../assets/9.jfif';
 import galleryImg10 from '../assets/10.jpg';
 import galleryImg11 from '../assets/11.jpg';
 import galleryImg12 from '../assets/12.jpg';
-import galleryImg13 from '../assets/13.jpg';
-import galleryImg14 from '../assets/14.jpg';
+import galleryImg13 from '../assets/13 (1).jfif';
+import galleryImg14 from '../assets/14.jfif';
+import galleryImg15 from '../assets/15.jfif';
+import galleryImg16 from '../assets/16.jfif';
+import galleryImg17 from '../assets/17.jfif';
+import galleryImg18 from '../assets/18.jfif';
+import galleryImg19 from '../assets/19.jfif';
 export interface Tour {
   id: string;
   slug?: string;
@@ -525,19 +529,23 @@ export const tours: Tour[] = [
     fullDescription: 'A unique Nubian experience on a traditional Dahabya - Discover authentic Nubian culture in an exceptional 4-day journey. Enjoy accommodation on the traditional Dahabya and explore Nubian villages and stunning archaeological sites in Aswan. This unique journey combines authentic Nubian culture with remarkable historical sites in an unforgettable trip.',
     galleryImages: [
       galleryImg1,
-      galleryImg2,
+      galleryImg9,
+      galleryImg13,
+      galleryImg14,
+      galleryImg15,
+      galleryImg16,
+      galleryImg17,
+      galleryImg18,
+      galleryImg19,
+       galleryImg2,
       galleryImg3,
-      galleryImg4,
       galleryImg5,
       galleryImg6,
       galleryImg7,
       galleryImg8,
-      galleryImg9,
       galleryImg10,
       galleryImg11,
-      galleryImg12,
-      galleryImg13,
-      galleryImg14
+      galleryImg12
     ]
   },
   {
@@ -611,20 +619,24 @@ export const tours: Tour[] = [
     ],
     fullDescription: "Nuba, located in Upper Egypt, is an enchanting destination for its rich cultural heritage and stunning natural landscapes. Discover the magic of Nubia and the grandeur of Abu Simbel — a journey through ancient temples, vibrant culture, and timeless landscapes along the Nile. Highlights include Philae Temple, visiting Nubian houses to watch crocodiles, Heissa Island, sunset from a secret spot, exploring local markets, Nubian Galabeya party, hidden gems, Abu Hawa Mountain hike, and shopping. The trip runs on 31/12 with New Year's celebrations on board the Dahabya.",
     galleryImages: [
-      galleryImg1,
-      galleryImg2,
+     galleryImg1,
+      galleryImg9,
+      galleryImg13,
+      galleryImg14,
+      galleryImg15,
+      galleryImg16,
+      galleryImg17,
+      galleryImg18,
+      galleryImg19,
+       galleryImg2,
       galleryImg3,
-      galleryImg4,
       galleryImg5,
       galleryImg6,
       galleryImg7,
       galleryImg8,
-      galleryImg9,
       galleryImg10,
       galleryImg11,
-      galleryImg12,
-      galleryImg13,
-      galleryImg14
+      galleryImg12
     ]
   },
   {
@@ -701,19 +713,24 @@ export const tours: Tour[] = [
     fullDescription: 'Nuba, located in Upper Egypt, is an enchanting destination for its rich cultural heritage and stunning natural landscapes. Discover the magic of Nubia and the grandeur of Abu Simbel — a journey through ancient temples, vibrant culture, and timeless landscapes along the Nile. Highlights include Philae Temple, visiting Nubian houses to watch crocodiles, Hesa Island, sunset from a secret spot, exploring local markets, Nubian Galabeya party, hidden gems, Abu Hawa Mountain hike, and shopping. Experience luxury on a traditional Dahabya with premium accommodations and authentic Nubian experiences.',
     galleryImages: [
       galleryImg1,
-      galleryImg2,
+      galleryImg9,
+      galleryImg13,
+      galleryImg14,
+      galleryImg15,
+      galleryImg16,
+      galleryImg17,
+      galleryImg18,
+      galleryImg19,
+       galleryImg2,
       galleryImg3,
-      galleryImg4,
       galleryImg5,
       galleryImg6,
       galleryImg7,
       galleryImg8,
-      galleryImg9,
       galleryImg10,
       galleryImg11,
-      galleryImg12,
-      galleryImg13,
-      galleryImg14
+      galleryImg12
+      
     ]
   },
 ];
