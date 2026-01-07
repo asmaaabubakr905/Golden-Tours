@@ -3,7 +3,8 @@ import { Filter, Search, MapPin, Clock, Star, Users, Calendar, Heart, Share2, Ar
 import TourCard from '../components/TourCard';
 import { tours, cities, getToursByCity } from '../data/tours';
 import { useLocation } from 'react-router-dom';
-// import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet';
+import staticOgImage from '../assets/nuba luxury escape.jpeg';
 
 const Tours = () => {
   const location = useLocation();
@@ -36,10 +37,12 @@ const Tours = () => {
 
   return (
     <div className="bg-gradient-to-br from-orange-50 via-white to-amber-50 min-h-screen">
-      {/* <Helmet>
-        <title>Egypt Tours & Experiences | Explore Egypt</title>
+      <Helmet>
+        <title>Egypt Tours & Experiences | Golden Tours</title>
         <meta name="description" content="Discover Egypt's iconic destinations with our curated tours. From pyramids to temples, book your adventure today!" />
-      </Helmet> */}
+        <meta property="og:image" content={window.location.origin + staticOgImage} />
+        <meta property="twitter:image" content={window.location.origin + staticOgImage} />
+      </Helmet>
 
       {/* Enhanced Header with Animation */}
       <section className="relative bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-white py-20 mt-16 overflow-hidden">
@@ -49,7 +52,7 @@ const Tours = () => {
           <div className="absolute top-32 right-20 w-32 h-32 bg-white/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
           <div className="absolute bottom-10 left-1/3 w-24 h-24 bg-white/10 rounded-full blur-xl animate-pulse delay-500"></div>
         </div>
-        
+
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
@@ -84,7 +87,7 @@ const Tours = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Search Bar */}
               <div className="relative mb-4 sm:mb-0">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -122,11 +125,10 @@ const Tours = () => {
                   <button
                     key={city}
                     onClick={() => setSelectedCity(city)}
-                    className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 transform hover:scale-105 ${
-                      selectedCity === city
-                        ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
-                        : 'bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-orange-50 border-2 border-gray-200 hover:border-orange-300'
-                    }`}
+                    className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 transform hover:scale-105 ${selectedCity === city
+                      ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
+                      : 'bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-orange-50 border-2 border-gray-200 hover:border-orange-300'
+                      }`}
                     aria-pressed={selectedCity === city}
                   >
                     {city}
@@ -147,11 +149,10 @@ const Tours = () => {
                       setSelectedCity(city);
                       setIsFilterOpen(false);
                     }}
-                    className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 transform hover:scale-105 ${
-                      selectedCity === city
-                        ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
-                        : 'bg-gray-50 text-gray-700 hover:bg-orange-50 border-2 border-gray-200 hover:border-orange-300'
-                    }`}
+                    className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 transform hover:scale-105 ${selectedCity === city
+                      ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
+                      : 'bg-gray-50 text-gray-700 hover:bg-orange-50 border-2 border-gray-200 hover:border-orange-300'
+                      }`}
                   >
                     {city}
                   </button>
@@ -185,8 +186,8 @@ const Tours = () => {
               <p className="text-gray-600 text-lg max-w-md mx-auto">
                 Try selecting a different city or check back later for new adventures.
               </p>
-              <button 
-                onClick={() => {setSelectedCity('All'); setSearchQuery('');}}
+              <button
+                onClick={() => { setSelectedCity('All'); setSearchQuery(''); }}
                 className="mt-6 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-3 rounded-xl font-medium hover:shadow-lg transform hover:scale-105 transition-all duration-200"
               >
                 View All Tours
@@ -195,7 +196,7 @@ const Tours = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredTours.map((tour, index) => (
-                <div 
+                <div
                   key={tour.id}
                   className="transform hover:scale-105 transition-all duration-300"
                   style={{
@@ -217,20 +218,20 @@ const Tours = () => {
           <div className="absolute top-20 left-20 w-40 h-40 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute bottom-20 right-20 w-60 h-60 bg-white/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
-        
+
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 mb-8">
             <Heart className="w-5 h-5 text-red-300" />
             <span className="text-sm font-medium text-white">Custom Experience</span>
           </div>
-          
+
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Can't Find What You're Looking For?
           </h2>
           <p className="text-xl text-orange-100 mb-10 max-w-2xl mx-auto leading-relaxed">
             We can create custom tours tailored to your interests and schedule. Let us craft your perfect Egyptian adventure.
           </p>
-          
+
           <a
             href="http://wa.me/201507000720"
             target="_blank"

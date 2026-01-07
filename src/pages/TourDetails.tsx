@@ -2,6 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, MapPin, Clock, Users, Star, Calendar, CheckCircle, XCircle, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getTourBySlug, getTourSlug } from '../data/tours';
+import { Helmet } from 'react-helmet';
+import staticOgImage from '../assets/nuba luxury escape.jpeg';
 
 const TourDetails = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -14,7 +16,7 @@ const TourDetails = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const [showCelebration, setShowCelebration] = useState(false);
-  
+
   const tour = getTourBySlug(slug || '');
 
   // Stable review count per tour to avoid changing on re-render
@@ -52,11 +54,11 @@ const TourDetails = () => {
       if (e.key === 'Escape') {
         setSelectedImageIndex(null);
       } else if (e.key === 'ArrowLeft') {
-        setSelectedImageIndex((prev) => 
+        setSelectedImageIndex((prev) =>
           prev !== null && prev > 0 ? prev - 1 : gallery.length - 1
         );
       } else if (e.key === 'ArrowRight') {
-        setSelectedImageIndex((prev) => 
+        setSelectedImageIndex((prev) =>
           prev !== null && prev < gallery.length - 1 ? prev + 1 : 0
         );
       }
@@ -65,14 +67,14 @@ const TourDetails = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedImageIndex, tour?.galleryImages]);
-  
+
   if (!tour) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Tour Not Found</h1>
           <p className="text-gray-600 mb-8">The tour you're looking for doesn't exist.</p>
-          <Link 
+          <Link
             to="/tours"
             className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors"
           >
@@ -161,7 +163,7 @@ const TourDetails = () => {
         console.log('Booking submitted successfully:', result);
         setSubmitSuccess(true);
         setIsSubmitting(false);
-        
+
         // Reset form after 2 seconds and close modal
         setTimeout(() => {
           setShowModal(false);
@@ -183,6 +185,25 @@ const TourDetails = () => {
 
   return (
     <div className="bg-white min-h-screen">
+      {tour && (
+        <Helmet>
+          <title>{tour.title} | Golden Tours</title>
+          <meta name="description" content={tour.description} />
+
+          {/* Open Graph / Facebook */}
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content={tour.title} />
+          <meta property="og:description" content={tour.description} />
+          <meta property="og:image" content={window.location.origin + staticOgImage} />
+
+          {/* Twitter */}
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:title" content={tour.title} />
+          <meta property="twitter:description" content={tour.description} />
+          <meta property="twitter:image" content={window.location.origin + staticOgImage} />
+        </Helmet>
+      )}
+
       {/* New Year Celebration Overlay (shows once on load for New Year trips only) */}
       {showCelebration && tour?.isNewYear && (
         <div className="fixed inset-0 z-40 pointer-events-none overflow-hidden">
@@ -295,7 +316,7 @@ const TourDetails = () => {
       )}
       {/* Image Lightbox Modal */}
       {selectedImageIndex !== null && tour.galleryImages && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4"
           onClick={() => setSelectedImageIndex(null)}
         >
@@ -306,13 +327,13 @@ const TourDetails = () => {
           >
             <X className="w-6 h-6" />
           </button>
-          
+
           {tour.galleryImages.length > 1 && (
             <>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  setSelectedImageIndex((prev) => 
+                  setSelectedImageIndex((prev) =>
                     prev !== null && prev > 0 ? prev - 1 : (tour.galleryImages?.length || 1) - 1
                   );
                 }}
@@ -324,7 +345,7 @@ const TourDetails = () => {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  setSelectedImageIndex((prev) => 
+                  setSelectedImageIndex((prev) =>
                     prev !== null && prev < (tour.galleryImages?.length || 1) - 1 ? prev + 1 : 0
                   );
                 }}
@@ -335,7 +356,7 @@ const TourDetails = () => {
               </button>
             </>
           )}
-          
+
           <div className="relative max-w-7xl max-h-full w-full h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
             {selectedImageIndex !== null && (
               <>
@@ -355,7 +376,7 @@ const TourDetails = () => {
 
       {/* Booking Modal */}
       {showModal && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4"
           onClick={() => {
             setShowModal(false);
@@ -364,7 +385,7 @@ const TourDetails = () => {
             setForm({ name: '', phone: '', guests: '1', date: '' });
           }}
         >
-          <div 
+          <div
             className="bg-gradient-to-br from-white via-orange-50 to-amber-50 rounded-3xl shadow-2xl w-full max-w-md max-h-[90vh] flex flex-col relative animate-fadeIn border border-orange-100"
             onClick={(e) => e.stopPropagation()}
           >
@@ -395,148 +416,144 @@ const TourDetails = () => {
                 </div>
               </div>
             ) : (
-            <form onSubmit={handleFormSubmit} className="flex-1 overflow-y-auto px-6 pb-6 space-y-4 min-h-0">
-              <div>
-                <label className="block text-gray-700 font-medium mb-1">Tour</label>
-                <input
-                  type="text"
-                  value={tour.title}
-                  readOnly
-                  className="w-full px-4 py-2 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 font-semibold focus:outline-none focus:ring-2 focus:ring-orange-400"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 font-medium mb-1">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleFormChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                  placeholder="Your Name"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 font-medium mb-1">Phone</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleFormChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                  placeholder="Your Phone Number"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 font-medium mb-1">Guests</label>
-                <div className="flex items-center justify-between space-x-3">
-                  <button
-                    type="button"
-                    onClick={() => adjustGuests(-1)}
-                    className="w-12 h-12 flex items-center justify-center rounded-full border border-gray-300 text-gray-700 text-xl font-bold hover:bg-gray-50 transition"
-                  >
-                    –
-                  </button>
-                  <div className="flex-1 text-center py-3 px-4 rounded-full border border-gray-300 bg-white text-gray-800 text-lg font-semibold">
-                    {form.guests}
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => adjustGuests(1)}
-                    className="w-12 h-12 flex items-center justify-center rounded-full border border-gray-300 text-gray-700 text-xl font-bold hover:bg-gray-50 transition"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-              {tour?.id === '12' && (
+              <form onSubmit={handleFormSubmit} className="flex-1 overflow-y-auto px-6 pb-6 space-y-4 min-h-0">
                 <div>
-                  <label className="block text-gray-700 font-medium mb-3">Select Date</label>
-                  <div className="grid grid-cols-2 gap-3">
-                    <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${
-                      form.date === '18 December' 
-                        ? 'border-orange-500 bg-orange-50 shadow-md' 
-                        : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
-                    }`}>
-                      <input
-                        type="radio"
-                        name="date"
-                        value="18 December"
-                        checked={form.date === '18 December'}
-                        onChange={handleFormChange}
-                        className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
-                        required
-                      />
-                      <span className={`ml-3 font-medium ${
-                        form.date === '18 December' 
-                          ? 'text-orange-600 font-semibold' 
-                          : 'text-gray-700 group-hover:text-orange-600'
-                      }`}>18 December</span>
-                    </label>
-                    <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${
-                      form.date === '28 January' 
-                        ? 'border-orange-500 bg-orange-50 shadow-md' 
-                        : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
-                    }`}>
-                      <input
-                        type="radio"
-                        name="date"
-                        value="28 January"
-                        checked={form.date === '28 January'}
-                        onChange={handleFormChange}
-                        className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
-                        required
-                      />
-                      <span className={`ml-3 font-medium ${
-                        form.date === '28 January' 
-                          ? 'text-orange-600 font-semibold' 
-                          : 'text-gray-700 group-hover:text-orange-600'
-                      }`}>28 January</span>
-                    </label>
+                  <label className="block text-gray-700 font-medium mb-1">Tour</label>
+                  <input
+                    type="text"
+                    value={tour.title}
+                    readOnly
+                    className="w-full px-4 py-2 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 font-semibold focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-medium mb-1">Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={form.name}
+                    onChange={handleFormChange}
+                    className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                    placeholder="Your Name"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-medium mb-1">Phone</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleFormChange}
+                    className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                    placeholder="Your Phone Number"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-medium mb-1">Guests</label>
+                  <div className="flex items-center justify-between space-x-3">
+                    <button
+                      type="button"
+                      onClick={() => adjustGuests(-1)}
+                      className="w-12 h-12 flex items-center justify-center rounded-full border border-gray-300 text-gray-700 text-xl font-bold hover:bg-gray-50 transition"
+                    >
+                      –
+                    </button>
+                    <div className="flex-1 text-center py-3 px-4 rounded-full border border-gray-300 bg-white text-gray-800 text-lg font-semibold">
+                      {form.guests}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => adjustGuests(1)}
+                      className="w-12 h-12 flex items-center justify-center rounded-full border border-gray-300 text-gray-700 text-xl font-bold hover:bg-gray-50 transition"
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
-              )}
-              {formError && <div className="text-red-500 text-sm text-center">{formError}</div>}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-lg font-semibold text-lg shadow-lg hover:from-orange-600 hover:to-orange-700 transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                    Submitting...
-                  </>
-                ) : (
-                  'Submit Booking'
+                {tour?.id === '12' && (
+                  <div>
+                    <label className="block text-gray-700 font-medium mb-3">Select Date</label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '18 December'
+                        ? 'border-orange-500 bg-orange-50 shadow-md'
+                        : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
+                        }`}>
+                        <input
+                          type="radio"
+                          name="date"
+                          value="18 December"
+                          checked={form.date === '18 December'}
+                          onChange={handleFormChange}
+                          className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
+                          required
+                        />
+                        <span className={`ml-3 font-medium ${form.date === '18 December'
+                          ? 'text-orange-600 font-semibold'
+                          : 'text-gray-700 group-hover:text-orange-600'
+                          }`}>18 December</span>
+                      </label>
+                      <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '28 January'
+                        ? 'border-orange-500 bg-orange-50 shadow-md'
+                        : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
+                        }`}>
+                        <input
+                          type="radio"
+                          name="date"
+                          value="28 January"
+                          checked={form.date === '28 January'}
+                          onChange={handleFormChange}
+                          className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
+                          required
+                        />
+                        <span className={`ml-3 font-medium ${form.date === '28 January'
+                          ? 'text-orange-600 font-semibold'
+                          : 'text-gray-700 group-hover:text-orange-600'
+                          }`}>28 January</span>
+                      </label>
+                    </div>
+                  </div>
                 )}
-              </button>
-              <a
-                href="https://ipn.eg/S/amrabouzied7/instapay/6QCON8"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center bg-white text-orange-600 border border-orange-200 py-3 rounded-lg font-semibold text-lg shadow-sm hover:bg-orange-50 transition-all"
-              >
-                Pay via InstaPay
-              </a>
-            </form>
+                {formError && <div className="text-red-500 text-sm text-center">{formError}</div>}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-lg font-semibold text-lg shadow-lg hover:from-orange-600 hover:to-orange-700 transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      Submitting...
+                    </>
+                  ) : (
+                    'Submit Booking'
+                  )}
+                </button>
+                <a
+                  href="https://ipn.eg/S/amrabouzied7/instapay/6QCON8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center bg-white text-orange-600 border border-orange-200 py-3 rounded-lg font-semibold text-lg shadow-sm hover:bg-orange-50 transition-all"
+                >
+                  Pay via InstaPay
+                </a>
+              </form>
             )}
           </div>
         </div>
       )}
       {/* Hero Section */}
       <section className="relative h-96 bg-gray-900 rounded-b-3xl overflow-hidden shadow-xl">
-        <img 
-          src={tour.image} 
+        <img
+          src={tour.image}
           alt={tour.title}
           className="w-full h-full object-cover rounded-b-3xl"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
         <div className="absolute inset-0 flex items-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <Link 
+            <Link
               to={`/tours?city=${encodeURIComponent(tour.city)}`}
               className="inline-flex items-center text-white hover:text-orange-300 transition-colors mb-4 drop-shadow-lg"
             >
@@ -651,11 +668,11 @@ const TourDetails = () => {
                           const dayHeaderMatch = item.trim().match(/^(DAY|Day)\s+(\d+)(?:\s*[–-]\s*(.+))?$/i);
                           const isEmpty = item.trim() === '';
                           const isSupplement = item.trim().startsWith('Foreigners extra supplement') || item.trim().startsWith('single room extra supplement');
-                          
+
                           if (isEmpty) {
                             return null;
                           }
-                          
+
                           if (isSupplement) {
                             return (
                               <div key={index} className="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg shadow-sm">
@@ -663,7 +680,7 @@ const TourDetails = () => {
                               </div>
                             );
                           }
-                          
+
                           if (dayHeaderMatch) {
                             const dayNumber = dayHeaderMatch[2];
                             const dayText = dayHeaderMatch[3] || '';
@@ -683,16 +700,16 @@ const TourDetails = () => {
                               </div>
                             );
                           }
-                          
+
                           // Check if item is a sub-item (starts with bullet) or "A visit to:"
                           const isSubItem = item.trim().startsWith('•');
                           const isVisitHeader = item.trim() === 'A visit to:';
-                          
+
                           // Only increment item number for regular items (not sub-items, not visit header)
                           if (!isSubItem && !isVisitHeader) {
                             itemNumber++;
                           }
-                          
+
                           return (
                             <div key={index} className={`flex items-start space-x-3 ${isSubItem ? 'ml-8' : ''}`}>
                               {!isSubItem && !isVisitHeader && (
@@ -799,11 +816,11 @@ const TourDetails = () => {
 
                 <div className="mt-4 text-center">
                   <p className="text-sm text-gray-600">
-                    Questions? 
-                    <a 
-                      href="http://wa.me/201507000720" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
+                    Questions?
+                    <a
+                      href="http://wa.me/201507000720"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-orange-500 hover:text-orange-600 ml-1"
                     >
                       Contact us on WhatsApp
