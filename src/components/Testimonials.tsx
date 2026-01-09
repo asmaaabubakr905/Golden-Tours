@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
-
+import { Star, Quote } from 'lucide-react';
 
 const reviews = [
   {
@@ -53,142 +52,127 @@ const reviews = [
   }
 ];
 
-
-
 const Testimonials = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [selectedReview, setSelectedReview] = useState<typeof reviews[0] | null>(null);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % reviews.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, []);
+  // Split reviews into two groups
+  const firstRow = reviews.slice(0, 3);
+  const secondRow = reviews.slice(3, 6);
 
-  const handleNext = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => (prev + 1) % reviews.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
-
-  const handlePrev = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
-
-  const currentReview = reviews[currentIndex];
-
-  return (
-    <section className="py-20 bg-gradient-to-br from-slate-50 via-orange-50 to-amber-50 relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-orange-200 rounded-full opacity-20 blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-amber-200 rounded-full opacity-20 blur-3xl"></div>
+  // Function to render a review card
+  const ReviewCard = ({ review }: { review: typeof reviews[0] }) => (
+    <div
+      onClick={() => setSelectedReview(review)}
+      className="w-[400px] h-[320px] bg-[#FFF8F0] rounded-[32px] p-8 flex flex-col justify-between shrink-0 mx-4 border border-orange-100 hover:shadow-lg transition-all duration-300 relative group cursor-pointer hover:-translate-y-1"
+    >
+      {/* Quote Icon */}
+      <div className="absolute top-8 right-8 text-gray-200 group-hover:text-orange-200 transition-colors">
+        <Quote className="w-10 h-10 fill-current" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            What Our Travelers Say
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Join thousands of satisfied adventurers who've experienced the journey of a lifetime
-          </p>
+      <div>
+        {/* Stars */}
+        <div className="flex gap-1 mb-6">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+          ))}
         </div>
 
-        {/* Review Slider */}
-        <div className="relative max-w-4xl mx-auto">
-          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 min-h-[300px] flex flex-col justify-center text-center relative">
-            {/* Top Quote Icon */}
-            <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-orange-500 to-amber-600 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
-              <Quote className="w-8 h-8 text-white" />
-            </div>
+        {/* Text */}
+        <p className="text-gray-700 text-lg leading-relaxed line-clamp-4 font-medium">
+          "{review.text}"
+        </p>
+      </div>
 
-            {/* Review Content */}
-            <div className={`transition-all duration-500 mt-6 ${isAnimating ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
+      {/* Author */}
+      <div className="flex items-center gap-4 mt-4">
+        <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-xl font-bold text-gray-800 shadow-sm border border-orange-100">
+          {review.name.charAt(0)}
+        </div>
+        <div>
+          <h4 className="font-bold text-gray-900">{review.name}</h4>
+          <p className="text-gray-500 text-sm">Verified Traveler</p>
+        </div>
+      </div>
+    </div>
+  );
 
-              {/* Stars */}
-              <div className="flex justify-center gap-1 mb-6">
+  return (
+    <section className="py-24 bg-[#FDFAF5] overflow-hidden relative">
+      <div className="text-center mb-16 px-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          What Our Travelers Say
+        </h2>
+        <p className="text-xl text-gray-600">
+          Real stories from real adventurers who've experienced our journeys
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-8">
+        {/* First Row - Scroll Right */}
+        <div className="flex overflow-hidden relative w-full">
+          <div className="flex animate-scroll-right hover:pause whitespace-nowrap">
+            {/* Duplicated content for seamless loop */}
+            {[...firstRow, ...firstRow, ...firstRow, ...firstRow].map((review, idx) => (
+              <ReviewCard key={`row1-${idx}`} review={review} />
+            ))}
+          </div>
+        </div>
+
+        {/* Second Row - Scroll Left */}
+        <div className="flex overflow-hidden relative w-full">
+          <div className="flex animate-scroll-left hover:pause whitespace-nowrap">
+            {/* Duplicated content for seamless loop */}
+            {[...secondRow, ...secondRow, ...secondRow, ...secondRow].map((review, idx) => (
+              <ReviewCard key={`row2-${idx}`} review={review} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Modal for full review */}
+      {selectedReview && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedReview(null)}>
+          <div
+            className="bg-white rounded-[32px] p-8 md:p-12 max-w-2xl w-full relative shadow-2xl animate-in fade-in zoom-in duration-300"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setSelectedReview(null)}
+              className="absolute top-6 right-6 p-2 rounded-full hover:bg-gray-100 transition-colors"
+            >
+              <svg className="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <div className="flex flex-col gap-6">
+              <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
                 ))}
               </div>
 
-              <p className="text-xl md:text-3xl text-gray-800 leading-relaxed mb-8 font-medium italic">
-                "{currentReview.text}"
-              </p>
+              <div className="max-h-[60vh] overflow-y-auto custom-scrollbar pr-4">
+                <p className="text-gray-800 text-xl leading-relaxed font-medium whitespace-pre-wrap">
+                  "{selectedReview.text}"
+                </p>
+              </div>
 
-              {/* Author Info */}
-              <div>
-                <h4 className="text-2xl font-bold text-gray-900 mb-1">{currentReview.name}</h4>
-                <p className="text-orange-600 font-medium">{currentReview.subtitle}</p>
-                {/* <p className="text-gray-500 text-sm mt-1">{currentReview.location}</p> */}
+              <div className="flex items-center gap-4 mt-4 pt-6 border-t border-gray-100">
+                <div className="w-16 h-16 rounded-full bg-orange-50 flex items-center justify-center text-2xl font-bold text-orange-600 shadow-sm">
+                  {selectedReview.name.charAt(0)}
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-gray-900">{selectedReview.name}</h4>
+                  <p className="text-orange-600 font-medium">{selectedReview.subtitle}</p>
+                  <p className="text-gray-500 text-sm">Verified Traveler • {selectedReview.location}</p>
+                </div>
               </div>
             </div>
-
-            {/* Navigation Buttons */}
-            <div className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2">
-              <button
-                onClick={handlePrev}
-                className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg hover:bg-orange-50 flex items-center justify-center transition-all duration-200 group border border-gray-100"
-                aria-label="Previous review"
-              >
-                <ChevronLeft className="w-6 h-6 text-gray-600 group-hover:text-orange-600" />
-              </button>
-            </div>
-
-            <div className="absolute top-1/2 -right-4 md:-right-12 -translate-y-1/2">
-              <button
-                onClick={handleNext}
-                className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg hover:bg-orange-50 flex items-center justify-center transition-all duration-200 group border border-gray-100"
-                aria-label="Next review"
-              >
-                <ChevronRight className="w-6 h-6 text-gray-600 group-hover:text-orange-600" />
-              </button>
-            </div>
-
-            {/* Dots */}
-            <div className="flex justify-center gap-2 mt-8">
-              {reviews.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex
-                    ? 'bg-gradient-to-r from-orange-500 to-amber-600 w-8'
-                    : 'bg-gray-300 w-2 hover:bg-gray-400'
-                    }`}
-                  aria-label={`Go to review ${idx + 1}`}
-                />
-              ))}
-            </div>
           </div>
         </div>
-
-        {/* Bottom trust indicators */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-5xl mx-auto">
-          <div className="bg-white rounded-2xl p-6 shadow-md hover:-translate-y-1 transition-transform duration-300">
-            <div className="text-3xl font-bold text-orange-600 mb-2">98%</div>
-            <p className="text-gray-600 font-medium">Satisfaction Rate</p>
-          </div>
-          <div className="bg-white rounded-2xl p-6 shadow-md hover:-translate-y-1 transition-transform duration-300">
-            <div className="text-3xl font-bold text-orange-500 mb-2">50+</div>
-            <p className="text-gray-600 font-medium">Countries Visited</p>
-          </div>
-          <div className="bg-white rounded-2xl p-6 shadow-md hover:-translate-y-1 transition-transform duration-300">
-            <div className="text-3xl font-bold text-amber-600 mb-2">15k+</div>
-            <p className="text-gray-600 font-medium">Happy Travelers</p>
-          </div>
-          <div className="bg-white rounded-2xl p-6 shadow-md hover:-translate-y-1 transition-transform duration-300">
-            <div className="text-3xl font-bold text-orange-600 mb-2">24/7</div>
-            <p className="text-gray-600 font-medium">Support Available</p>
-          </div>
-        </div>
-      </div>
+      )}
     </section>
   );
 };
