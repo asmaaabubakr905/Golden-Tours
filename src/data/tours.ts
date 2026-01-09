@@ -12,6 +12,7 @@ import img11 from '../assets/fluca luxor.jpg';
 import nubaImg from '../assets/Nuba.jpg';
 import nubaNewYearsImg from '../assets/31DEC.png';
 import nubaLuxuryEscapeImg from '../assets/nuba luxury escape.jpeg';
+import blackWhiteImg from '../assets/black&white desert.jpeg';
 import galleryImg1 from '../assets/1.jfif';
 import galleryImg2 from '../assets/2.jpg';
 import galleryImg3 from '../assets/3.jpg';
@@ -102,7 +103,7 @@ export const tours: Tour[] = [
     id: '2',
     title: 'Egyptian Museum & Old Cairo Tour',
     description: 'Discover the treasures of ancient Egypt and explore the historic Islamic and Coptic quarters of Old Cairo.',
-    image:img9,
+    image: img9,
     price: 75,
     duration: '8 hours',
     location: 'Central Cairo',
@@ -395,7 +396,7 @@ export const tours: Tour[] = [
     id: '10',
     title: 'Nubian Village',
     description: 'Discover the traditional Nubian village of Aswan, known for its unique culture and traditional way of life.',
-    image:  img3,
+    image: img3,
     price: 45,
     duration: '4 hours',
     location: 'Aswan',
@@ -537,7 +538,7 @@ export const tours: Tour[] = [
       galleryImg17,
       galleryImg18,
       galleryImg19,
-       galleryImg2,
+      galleryImg2,
       galleryImg3,
       galleryImg5,
       galleryImg6,
@@ -619,7 +620,7 @@ export const tours: Tour[] = [
     ],
     fullDescription: "Nuba, located in Upper Egypt, is an enchanting destination for its rich cultural heritage and stunning natural landscapes. Discover the magic of Nubia and the grandeur of Abu Simbel — a journey through ancient temples, vibrant culture, and timeless landscapes along the Nile. Highlights include Philae Temple, visiting Nubian houses to watch crocodiles, Heissa Island, sunset from a secret spot, exploring local markets, Nubian Galabeya party, hidden gems, Abu Hawa Mountain hike, and shopping. The trip runs on 31/12 with New Year's celebrations on board the Dahabya.",
     galleryImages: [
-     galleryImg1,
+      galleryImg1,
       galleryImg9,
       galleryImg13,
       galleryImg14,
@@ -628,7 +629,7 @@ export const tours: Tour[] = [
       galleryImg17,
       galleryImg18,
       galleryImg19,
-       galleryImg2,
+      galleryImg2,
       galleryImg3,
       galleryImg5,
       galleryImg6,
@@ -676,7 +677,7 @@ export const tours: Tour[] = [
       'Felucca ride to Abu Hawa Mountain',
       'Hiking and photos from the highest point in Aswan',
       'Sailing boat on the Nile River',
-      'Kayaking on the Nile (optional)',
+      'Kayaking on the Nile (Optional) - 300 EGP',
       'Visit to Mafia Island',
       'Sandboarding experience',
       'Premium dinner on the Dahabya',
@@ -684,8 +685,9 @@ export const tours: Tour[] = [
       '',
       'DAY 4 – DEPARTURE',
       'Breakfast',
-      'Luxor Hot Air Balloon (optional)',
-      'Abu Simbel visit (optional)',
+      'Luxor Overday & Hot Air Balloon (Optional) - 4400 EGP',
+      '• Hot Air Balloon - Luxor Temple - Karnak Temple - Hatshepsut Temple - Valley of the Kings - Colossi of Memnon',
+      'Abu Simbel visit (Optional) - 1700 EGP',
       'Check-out',
       'Drop-off at the train station',
       'Foreigners extra supplement 110 Usd',
@@ -721,7 +723,7 @@ export const tours: Tour[] = [
       galleryImg17,
       galleryImg18,
       galleryImg19,
-       galleryImg2,
+      galleryImg2,
       galleryImg3,
       galleryImg5,
       galleryImg6,
@@ -730,12 +732,70 @@ export const tours: Tour[] = [
       galleryImg10,
       galleryImg11,
       galleryImg12
-      
+
     ]
   },
+  {
+    id: '15',
+    title: 'Black & White Desert',
+    description: 'Join Golden Tours for an endless adventure – experience the magical contrast of the Black & White Desert, where striking landscapes meet unforgettable desert wonders.',
+    image: blackWhiteImg,
+    price: 5500,
+    duration: '3 days',
+    location: 'Black & White Desert',
+    city: 'New Valley',
+    rating: 5.0,
+    maxGuests: 20,
+    featured: true,
+    special: true,
+    tourDate: '5th - 7th Feb ',
+    itinerary: [
+      'Day 1 - ARRIVAL DAY / FARAFRA & DJARA CAVE',
+      'Meet at Al-Nour Mosque in Abbasiya at 10:30 PM',
+      'Departure at 11:00 PM via the Asyut International Road',
+      'Explore Djara Cave',
+      'Enjoy breakfast in Farafra Oasis',
+      'Continue visiting Badr Museum, Farafra Palace, and the Old Spring',
+      'Lunch at the Roman Springs',
+      'Return to Farafra Oasis to explore the local market',
+      '',
+      'Day 2 - CANYONS, SPRINGS & STARS',
+      'Enjoy breakfast at the camp',
+      '4x4 desert adventure through Wadi Al-Aqabat, Bride’s Hand Rock, Wadi Hannes, Ain El-Serw, Ain Khadra, and the White House area',
+      'Have lunch at a scenic desert spot',
+      'Explore the formations of the White Desert (Mushroom, Chicken, Rabbit, Horse, and Fox House)',
+      'Watch sunset and return to camp for Bedouin dinner',
+      'Bedouin music and dance featuring "Mizmar Wahy"',
+      'Stargazing around the fire with Bedouin tea',
+      'Overnight camping',
+      '',
+      'Day 3 - Crystal Mountain and Black Desert Day',
+      'Early breakfast before packing up',
+      'Travel toward Bahariya Oasis',
+      'Visit Crystal Mountain and the Black Desert',
+      'Rest and shopping stop in Bahariya',
+      'Return to Cairo (arrival 8:00 - 10:00 PM)'
+    ],
+    includes: [
+      'Transportation (modern and air-conditioned vehicles)',
+      '4x4 desert safaris',
+      'All activities and visits mentioned',
+      'Bedouin party and bonfire',
+      'Camping equipment (tents, mattresses, blankets/sleeping bags)',
+      'Portable bathroom for camping',
+      'Entry tickets to Badr Museum and Farafra House',
+      'Meals (7 total)'
+    ],
+    excludes: [
+      'Personal expenses',
+      'Personal tipping',
+      'Any extra meals or drinks'
+    ],
+    fullDescription: 'Join Golden Tours for an endless adventure – experience the magical contrast of the Black & White Desert, where striking landscapes meet unforgettable desert wonders. A Curated Luxury Escape in the heart of the Egyptian desert.'
+  }
 ];
 
-export const cities = ['All', 'Cairo', 'Alexandria', 'Luxor', 'Aswan'];
+export const cities = ['All', 'Cairo', 'Alexandria', 'Luxor', 'Aswan', 'New Valley'];
 
 export const getFeaturedTours = () => tours.filter(tour => tour.featured);
 export const getToursByCity = (city: string) => {

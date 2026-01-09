@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 // اختر رحلة واحدة من كل مدينة رئيسية
 const featuredTours: Tour[] = [
+  getToursByCity('New Valley')[0],
   getToursByCity('Aswan')[0], // Will be newest tour since Aswan tours are reversed
   getToursByCity('Cairo')[0],
   getToursByCity('Luxor')[0],
@@ -18,7 +19,7 @@ const TourCard = ({ tour }: { tour: Tour }) => {
   const handleShare = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     const tourUrl = `${window.location.origin}/tour/${getTourSlug(tour)}`;
     const shareData = {
       title: tour.title,
@@ -54,7 +55,7 @@ const TourCard = ({ tour }: { tour: Tour }) => {
   };
 
   return (
-    <div 
+    <div
       className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 group transform hover:-translate-y-2 relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -66,7 +67,7 @@ const TourCard = ({ tour }: { tour: Tour }) => {
           Featured
         </div>
       )}
-      
+
       {/* Share Button */}
       <button
         onClick={handleShare}
@@ -82,13 +83,13 @@ const TourCard = ({ tour }: { tour: Tour }) => {
 
       {/* Image Section */}
       <div className="relative overflow-hidden h-64">
-        <img 
-          src={tour.image} 
+        <img
+          src={tour.image}
           alt={tour.title}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        
+
         {/* Category Badge */}
         {tour.city && (
           <div className="absolute bottom-4 left-4 bg-black bg-opacity-50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
@@ -110,12 +111,12 @@ const TourCard = ({ tour }: { tour: Tour }) => {
             <span className="text-sm font-bold text-gray-800">{tour.rating}</span>
           </div>
         </div>
-        
+
         {/* Title */}
         <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-orange-500 transition-colors duration-300 line-clamp-2">
           {tour.title}
         </h3>
-        
+
         {/* Description */}
         <p className="text-gray-600 mb-4 line-clamp-3 text-sm leading-relaxed">
           {tour.description}
@@ -143,11 +144,10 @@ const TourCard = ({ tour }: { tour: Tour }) => {
           </div>
           <Link
             to={`/tour/${getTourSlug(tour)}`}
-            className={`px-6 py-2 rounded-xl font-medium transition-all duration-300 ${
-              isHovered 
-                ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg scale-105' 
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
+            className={`px-6 py-2 rounded-xl font-medium transition-all duration-300 ${isHovered
+              ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg scale-105'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
           >
             View Details
           </Link>
@@ -231,16 +231,16 @@ const FeaturedTours = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">
-        <div className="h-1 w-12 bg-gradient-to-r from-orange-500 to-amber-600 rounded-full"></div>
-        <span className="text-orange-600 font-semibold uppercase tracking-wide">Tours</span>
-        <div className="h-1 w-12 bg-gradient-to-r from-orange-500 to-amber-600 rounded-full"></div>
+            <div className="h-1 w-12 bg-gradient-to-r from-orange-500 to-amber-600 rounded-full"></div>
+            <span className="text-orange-600 font-semibold uppercase tracking-wide">Tours</span>
+            <div className="h-1 w-12 bg-gradient-to-r from-orange-500 to-amber-600 rounded-full"></div>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-        Featured Tours
+            Featured Tours
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-        Discover our most popular experiences, carefully crafted to showcase the best of Egypt's 
-        ancient wonders and cultural heritage.
+            Discover our most popular experiences, carefully crafted to showcase the best of Egypt's
+            ancient wonders and cultural heritage.
           </p>
         </div>
 
@@ -299,25 +299,24 @@ const FeaturedTours = () => {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  currentSlide === index
-                    ? 'bg-gradient-to-r from-orange-500 to-amber-600 w-8' 
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index
+                  ? 'bg-gradient-to-r from-orange-500 to-amber-600 w-8'
+                  : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
               />
             ))}
           </div>
         </div>
-       
+
         {/* CTA Button */}
         <div className="text-center">
           <a
-        href="/tours"
-        className="bg-gradient-to-r from-orange-500 to-amber-600 text-white px-10 py-4 rounded-2xl text-lg font-semibold hover:from-orange-600 hover:to-amber-700 transition-all duration-300 inline-flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            href="/tours"
+            className="bg-gradient-to-r from-orange-500 to-amber-600 text-white px-10 py-4 rounded-2xl text-lg font-semibold hover:from-orange-600 hover:to-amber-700 transition-all duration-300 inline-flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
-        <Calendar className="mr-3 w-5 h-5" />
-        View All Tours
-        <ArrowRight className="ml-3 w-5 h-5" />
+            <Calendar className="mr-3 w-5 h-5" />
+            View All Tours
+            <ArrowRight className="ml-3 w-5 h-5" />
           </a>
         </div>
       </div>

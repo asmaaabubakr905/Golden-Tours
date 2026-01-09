@@ -12,7 +12,7 @@ const TourCard: React.FC<TourCardProps> = ({ tour }) => {
   const handleShare = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     const tourUrl = `${window.location.origin}/tour/${getTourSlug(tour)}`;
     const shareData = {
       title: tour.title,
@@ -51,7 +51,7 @@ const TourCard: React.FC<TourCardProps> = ({ tour }) => {
     <div className="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-orange-200 transform hover:-translate-y-2">
       {/* Gradient Overlay Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 via-transparent to-amber-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-      
+
       {/* Featured Badge */}
       {tour.featured && (
         <div className="absolute top-4 left-4 z-20">
@@ -64,7 +64,7 @@ const TourCard: React.FC<TourCardProps> = ({ tour }) => {
 
       {/* Action Buttons */}
       <div className="absolute top-4 right-4 z-20 flex space-x-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-        <button 
+        <button
           onClick={handleShare}
           className="bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200 relative"
           aria-label="Share tour"
@@ -85,7 +85,7 @@ const TourCard: React.FC<TourCardProps> = ({ tour }) => {
           alt={tour.title}
           className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
         />
-        
+
         {/* Rating Badge */}
         <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-2xl px-3 py-2 shadow-lg z-20">
           <div className="flex items-center space-x-1">
@@ -145,7 +145,7 @@ const TourCard: React.FC<TourCardProps> = ({ tour }) => {
         >
           <span>View Details</span>
           <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-200" />
-          
+
           {/* Button Glow Effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-500 rounded-2xl blur opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300 -z-10"></div>
         </a>

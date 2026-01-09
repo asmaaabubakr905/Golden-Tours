@@ -1,36 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
-import Img from '../assets/R.jpeg';
+
 
 const reviews = [
   {
-    name: 'Jess',
-    text: 'The whole tour was out of this world and it was so humbling. Every day was well organized we didn\'t experience any issues.',
-    subtitle: 'Exceeded our expectations',
-    rating: 4.96,
-    location: 'New York, USA',
-    avatar: Img
-  },
-  {
-    name: 'Ahmed',
-    text: 'Amazing experience! The guides were knowledgeable and friendly. Highly recommended for anyone seeking adventure.',
-    subtitle: 'Wonderful trip',
+    name: 'Hassnaa',
+    text: 'Thanks for your efforts ya gama3a basatona & you made my first solo trip much more friendly, thanksss ❤️❤️🙏',
+    subtitle: 'Friendly Solo Trip',
     rating: 5,
-    location: 'Dubai, UAE',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'
+    location: 'Happy Traveler',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80'
   },
   {
-    name: 'Sara',
-    text: 'Loved every moment. The organization and attention to detail were top-notch. Will definitely book again!',
-    subtitle: 'Unforgettable journey',
-    rating: 4.8,
-    location: 'London, UK',
+    name: 'Nirvana Gouda',
+    text: 'Thank you Amr and Mostafa for this beautiful trip💖✨ to many more and good luck golden tours! So glad I got to meet all of you🤍🤍',
+    subtitle: 'Beautiful Trip',
+    rating: 5,
+    location: 'Happy Traveler',
+    avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80'
+  },
+  {
+    name: 'Rita',
+    text: 'Mostafa & Amr thank you so much guys for the wonderful tour and wonderful time! Your warmth, fun and knowledge made the experience truly special. We really enjoyed every moment 🎇',
+    subtitle: 'Wonderful Time',
+    rating: 5,
+    location: 'Happy Traveler',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80'
   },
+  {
+    name: 'Hana Nour',
+    text: 'شكرا اوي اوي اوي عمرو و مصطفى على التريب دي بكل حاجه فيها بجد عملتوا كل حاجه و زياده عشان تبقى حلوه كده! ❤️ اتبسطنا اوي بكل حاجه و مبسوطه اكتر اني عرفتكم كلكم و ان شاء الله نتقابل في سفريات تانيه كتير ❤️😘 Mostafa Kamel & amr abozad much much love❤️❤️❤️',
+    subtitle: 'Exceptional Experience',
+    rating: 5,
+    location: 'Happy Traveler',
+    avatar: 'https://images.unsplash.com/photo-1619895862022-09114b41f16f?auto=format&fit=crop&w=150&q=80'
+  },
+  {
+    name: 'Gee',
+    text: 'Thank guys for the awesome trip and getting to know you all.. this group has truly made this trip 10 times better and the memories unforgettable ❤️',
+    subtitle: 'Unforgettable Memories',
+    rating: 5,
+    location: 'Happy Traveler',
+    avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=150&q=80'
+  },
+  {
+    name: 'Walaa Kamal',
+    text: "Thank you so much Amr and Moustafa for your endless efforts to full fill our requests 🌷🌷🌷🌷 taking us for such amazing places and experiences. Embrace the beauty of life like this nile voyage under the full moon , I don't think I would ever forget such a magical moment. Hawa hiking and the spot up there worth all the time and sweat 😃😃\nI enjoyed all the activities the hype 🎉🎉 and the peaceful ones 🕊️\nThanks for being part of unforgettable chapter of my diary.\nBest of luck and many more adventures to come isa ❤️❤️🌷🌷🙏🙏",
+    subtitle: 'Magical Moments',
+    rating: 5,
+    location: 'Happy Traveler',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
+  }
 ];
 
-const totalReviews = 1739;
-const reviewImg = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80';
+
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,10 +61,10 @@ const Testimonials = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      handleNext();
-    }, 6000);
+      setCurrentIndex((prev) => (prev + 1) % reviews.length);
+    }, 3000);
     return () => clearInterval(timer);
-  }, [currentIndex]);
+  }, []);
 
   const handleNext = () => {
     if (isAnimating) return;
@@ -66,10 +89,10 @@ const Testimonials = () => {
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-orange-200 rounded-full opacity-20 blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-amber-200 rounded-full opacity-20 blur-3xl"></div>
       </div>
-      
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             What Our Travelers Say
           </h2>
@@ -78,116 +101,91 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left side - Image with stats */}
-          <div className="relative">
-            <div className="relative group">
-              <img
-                src={reviewImg}
-                alt="Happy travelers"
-                className="rounded-3xl object-cover w-full h-[500px] shadow-2xl transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-3xl"></div>
-              
-              {/* Floating stats card */}
-              <div className="absolute -bottom-8 -right-8 bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="flex">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <span className="text-2xl font-bold text-gray-900">{currentReview.rating}</span>
-                </div>
-                <p className="text-gray-600 font-medium">{totalReviews.toLocaleString()} Reviews</p>
+        {/* Review Slider */}
+        <div className="relative max-w-4xl mx-auto">
+          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 min-h-[300px] flex flex-col justify-center text-center relative">
+            {/* Top Quote Icon */}
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-orange-500 to-amber-600 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+              <Quote className="w-8 h-8 text-white" />
+            </div>
+
+            {/* Review Content */}
+            <div className={`transition-all duration-500 mt-6 ${isAnimating ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
+
+              {/* Stars */}
+              <div className="flex justify-center gap-1 mb-6">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
+                ))}
+              </div>
+
+              <p className="text-xl md:text-3xl text-gray-800 leading-relaxed mb-8 font-medium italic">
+                "{currentReview.text}"
+              </p>
+
+              {/* Author Info */}
+              <div>
+                <h4 className="text-2xl font-bold text-gray-900 mb-1">{currentReview.name}</h4>
+                <p className="text-orange-600 font-medium">{currentReview.subtitle}</p>
+                {/* <p className="text-gray-500 text-sm mt-1">{currentReview.location}</p> */}
               </div>
             </div>
-          </div>
 
-          {/* Right side - Review slider */}
-          <div className="relative">
-            <div className="bg-white rounded-3xl p-10 shadow-xl border border-gray-100 relative min-h-[400px] flex flex-col justify-between">
-              {/* Quote icon */}
-              <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
-                <Quote className="w-6 h-6 text-white" />
-              </div>
+            {/* Navigation Buttons */}
+            <div className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2">
+              <button
+                onClick={handlePrev}
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg hover:bg-orange-50 flex items-center justify-center transition-all duration-200 group border border-gray-100"
+                aria-label="Previous review"
+              >
+                <ChevronLeft className="w-6 h-6 text-gray-600 group-hover:text-orange-600" />
+              </button>
+            </div>
 
-              {/* Review content */}
-              <div className={`transition-all duration-500 ${isAnimating ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
-                <div className="mb-8">
-                  <p className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-6">
-                    "{currentReview.text}"
-                  </p>
-                  <div className="h-1 w-20 bg-gradient-to-r from-orange-500 to-amber-600 rounded-full"></div>
-                </div>
+            <div className="absolute top-1/2 -right-4 md:-right-12 -translate-y-1/2">
+              <button
+                onClick={handleNext}
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg hover:bg-orange-50 flex items-center justify-center transition-all duration-200 group border border-gray-100"
+                aria-label="Next review"
+              >
+                <ChevronRight className="w-6 h-6 text-gray-600 group-hover:text-orange-600" />
+              </button>
+            </div>
 
-                {/* Author info */}
-                <div className="flex items-center gap-4">
-                  <img
-                    src={currentReview.avatar}
-                    alt={currentReview.name}
-                    className="w-16 h-16 rounded-full object-cover border-3 border-white shadow-lg"
-                  />
-                  <div>
-                    <h4 className="text-xl font-bold text-gray-900">{currentReview.name}</h4>
-                    <p className="text-orange-600 font-medium">{currentReview.subtitle}</p>
-                    <p className="text-gray-500 text-sm">{currentReview.location}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Navigation */}
-              <div className="flex items-center justify-between mt-8">
-                <div className="flex gap-2">
-                  {reviews.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrentIndex(idx)}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        idx === currentIndex 
-                          ? 'bg-gradient-to-r from-orange-500 to-amber-600 w-8' 
-                          : 'bg-gray-300 hover:bg-gray-400'
-                      }`}
-                    />
-                  ))}
-                </div>
-                
-                <div className="flex gap-2">
-                  <button
-                    onClick={handlePrev}
-                    className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors duration-200 group"
-                  >
-                    <ChevronLeft className="w-5 h-5 text-gray-600 group-hover:text-gray-800" />
-                  </button>
-                  <button
-                    onClick={handleNext}
-                    className="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 flex items-center justify-center transition-all duration-200 group"
-                  >
-                    <ChevronRight className="w-5 h-5 text-white" />
-                  </button>
-                </div>
-              </div>
+            {/* Dots */}
+            <div className="flex justify-center gap-2 mt-8">
+              {reviews.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex
+                    ? 'bg-gradient-to-r from-orange-500 to-amber-600 w-8'
+                    : 'bg-gray-300 w-2 hover:bg-gray-400'
+                    }`}
+                  aria-label={`Go to review ${idx + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
 
         {/* Bottom trust indicators */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div className="bg-white rounded-2xl p-6 shadow-lg">
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-5xl mx-auto">
+          <div className="bg-white rounded-2xl p-6 shadow-md hover:-translate-y-1 transition-transform duration-300">
             <div className="text-3xl font-bold text-orange-600 mb-2">98%</div>
-            <p className="text-gray-600">Satisfaction Rate</p>
+            <p className="text-gray-600 font-medium">Satisfaction Rate</p>
           </div>
-          <div className="bg-white rounded-2xl p-6 shadow-lg">
+          <div className="bg-white rounded-2xl p-6 shadow-md hover:-translate-y-1 transition-transform duration-300">
             <div className="text-3xl font-bold text-orange-500 mb-2">50+</div>
-            <p className="text-gray-600">Countries Visited</p>
+            <p className="text-gray-600 font-medium">Countries Visited</p>
           </div>
-          <div className="bg-white rounded-2xl p-6 shadow-lg">
+          <div className="bg-white rounded-2xl p-6 shadow-md hover:-translate-y-1 transition-transform duration-300">
             <div className="text-3xl font-bold text-amber-600 mb-2">15k+</div>
-            <p className="text-gray-600">Happy Travelers</p>
+            <p className="text-gray-600 font-medium">Happy Travelers</p>
           </div>
-          <div className="bg-white rounded-2xl p-6 shadow-lg">
+          <div className="bg-white rounded-2xl p-6 shadow-md hover:-translate-y-1 transition-transform duration-300">
             <div className="text-3xl font-bold text-orange-600 mb-2">24/7</div>
-            <p className="text-gray-600">Support Available</p>
+            <p className="text-gray-600 font-medium">Support Available</p>
           </div>
         </div>
       </div>
