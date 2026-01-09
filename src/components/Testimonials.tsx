@@ -63,35 +63,35 @@ const Testimonials = () => {
   const ReviewCard = ({ review }: { review: typeof reviews[0] }) => (
     <div
       onClick={() => setSelectedReview(review)}
-      className="w-[320px] h-[260px] bg-[#FFF8F0] rounded-[32px] p-6 flex flex-col justify-between shrink-0 mx-4 border border-orange-100 hover:shadow-lg transition-all duration-300 relative group cursor-pointer hover:-translate-y-1"
+      className="w-[280px] h-[220px] bg-[#FFF8F0] rounded-[24px] p-5 flex flex-col justify-between shrink-0 mx-3 border border-orange-100 hover:shadow-lg transition-all duration-300 relative group cursor-pointer hover:-translate-y-1"
     >
       {/* Quote Icon */}
-      <div className="absolute top-8 right-8 text-gray-200 group-hover:text-orange-200 transition-colors">
-        <Quote className="w-10 h-10 fill-current" />
+      <div className="absolute top-5 right-5 text-gray-200 group-hover:text-orange-200 transition-colors">
+        <Quote className="w-8 h-8 fill-current" />
       </div>
 
       <div>
         {/* Stars */}
-        <div className="flex gap-1 mb-6">
+        <div className="flex gap-1 mb-3">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+            <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
           ))}
         </div>
 
         {/* Text */}
-        <p className="text-gray-700 text-lg leading-relaxed line-clamp-4 font-medium">
+        <p className="text-gray-700 text-sm leading-relaxed line-clamp-4 font-medium">
           "{review.text}"
         </p>
       </div>
 
       {/* Author */}
-      <div className="flex items-center gap-4 mt-4">
-        <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-xl font-bold text-gray-800 shadow-sm border border-orange-100">
+      <div className="flex items-center gap-3 mt-3">
+        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-lg font-bold text-gray-800 shadow-sm border border-orange-100">
           {review.name.charAt(0)}
         </div>
         <div>
-          <h4 className="font-bold text-gray-900">{review.name}</h4>
-          <p className="text-gray-500 text-sm">Verified Traveler</p>
+          <h4 className="font-bold text-gray-900 text-sm">{review.name}</h4>
+          <p className="text-gray-500 text-xs">Verified Traveler</p>
         </div>
       </div>
     </div>
