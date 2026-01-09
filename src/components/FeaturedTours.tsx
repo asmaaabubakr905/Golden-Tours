@@ -163,6 +163,36 @@ const FeaturedTours = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [pendingSlide, setPendingSlide] = useState<number | null>(null);
 
+  // Touch handling state
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
+  };
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
@@ -179,7 +209,7 @@ const FeaturedTours = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
- 
+
 
   const maxSlide = visibleTours === 1 ? featuredTours.length : featuredTours.length - visibleTours + 1;
   const nextSlide = () => {
@@ -248,6 +278,9 @@ const FeaturedTours = () => {
               style={{
                 transform: `translateX(-${currentSlide * (100 / visibleTours)}%)`
               }}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
               {featuredTours.map((tour) => (
                 <div
