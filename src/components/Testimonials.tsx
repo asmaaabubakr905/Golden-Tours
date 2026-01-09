@@ -63,7 +63,7 @@ const Testimonials = () => {
   const ReviewCard = ({ review }: { review: typeof reviews[0] }) => (
     <div
       onClick={() => setSelectedReview(review)}
-      className="w-[400px] h-[320px] bg-[#FFF8F0] rounded-[32px] p-8 flex flex-col justify-between shrink-0 mx-4 border border-orange-100 hover:shadow-lg transition-all duration-300 relative group cursor-pointer hover:-translate-y-1"
+      className="w-[320px] h-[260px] bg-[#FFF8F0] rounded-[32px] p-6 flex flex-col justify-between shrink-0 mx-4 border border-orange-100 hover:shadow-lg transition-all duration-300 relative group cursor-pointer hover:-translate-y-1"
     >
       {/* Quote Icon */}
       <div className="absolute top-8 right-8 text-gray-200 group-hover:text-orange-200 transition-colors">
