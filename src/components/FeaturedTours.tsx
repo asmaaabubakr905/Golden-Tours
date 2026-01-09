@@ -179,11 +179,7 @@ const FeaturedTours = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Animation logic
-  const triggerSlide = (next: number) => {
-    setIsTransitioning(true);
-    setPendingSlide(next);
-  };
+ 
 
   const maxSlide = visibleTours === 1 ? featuredTours.length : featuredTours.length - visibleTours + 1;
   const nextSlide = () => {

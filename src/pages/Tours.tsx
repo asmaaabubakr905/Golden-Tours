@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Filter, Search, MapPin, Clock, Star, Users, Calendar, Heart, Share2, ArrowRight, Sparkles } from 'lucide-react';
+import { Filter, Search, MapPin, Heart, ArrowRight, Sparkles } from 'lucide-react';
 import TourCard from '../components/TourCard';
-import { tours, cities, getToursByCity } from '../data/tours';
+import { cities, getToursByCity } from '../data/tours';
 import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import staticOgImage from '../assets/nuba luxury escape.jpeg';

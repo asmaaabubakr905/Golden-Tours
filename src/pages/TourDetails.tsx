@@ -653,7 +653,6 @@ const TourDetails = () => {
                   <div>
                     <h3 className="text-2xl font-bold text-orange-500 mb-4 flex items-center"><CheckCircle className="w-6 h-6 mr-2 text-orange-400" />Tour Overview</h3>
                     <p className="text-gray-700 mb-6">{tour.fullDescription}</p>
-                    <p className="text-gray-600">{tour.description}</p>
                   </div>
                 )}
 
