@@ -117,8 +117,8 @@ const TourDetails = () => {
       setFormError('Please fill in all fields.');
       return;
     }
-    // Check if date is required for Nuba Experience
-    if (tour?.id === '12' && !form.date) {
+    // Check if date is required for Nuba Experience or Nuba Luxury Escape
+    if ((tour?.id === '12' || tour?.id === '14') && !form.date) {
       setFormError('Please select a date.');
       return;
     }
@@ -131,7 +131,7 @@ const TourDetails = () => {
         name: form.name,
         phone: form.phone,
         guests: form.guests,
-        selectDate: tour?.id === '12' ? form.date : ''
+        selectDate: (tour?.id === '12' || tour?.id === '14') ? form.date : ''
       };
 
       // Log data being sent for debugging
@@ -147,7 +147,7 @@ const TourDetails = () => {
       formData.append('name', dataToSend.name);
       formData.append('phone', dataToSend.phone);
       formData.append('guests', dataToSend.guests);
-      formData.append('selectDate', dataToSend.selectDate);
+      formData.append('selectDate', dataToSend.selectDate || '');
 
       const response = await fetch(WEB_APP_URL, {
         method: 'POST',
@@ -389,7 +389,7 @@ const TourDetails = () => {
             className="bg-gradient-to-br from-white via-orange-50 to-amber-50 rounded-3xl shadow-2xl w-full max-w-md max-h-[90vh] flex flex-col relative animate-fadeIn border border-orange-100"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex-shrink-0 p-6 pb-4">
+            <div className="flex-shrink-0 p-6 pb-2">
               <button
                 className="absolute top-4 right-4 text-gray-400 hover:text-orange-500 transition-colors z-10 bg-white rounded-full p-1 shadow-sm"
                 onClick={() => {
@@ -402,8 +402,8 @@ const TourDetails = () => {
               >
                 <X className="w-6 h-6" />
               </button>
-              <h2 className="text-2xl font-bold text-orange-500 mb-2 text-center pr-8">Book This Tour</h2>
-              <p className="text-gray-600 text-center mb-4">Fill in your details and we will contact you soon.</p>
+              <h2 className="text-2xl font-bold text-orange-500 mb-1 text-center pr-8">Book This Tour</h2>
+              <p className="text-gray-600 text-center mb-2">Fill in your details and we will contact you soon.</p>
             </div>
             {submitSuccess ? (
               <div className="flex-1 flex items-center justify-center px-6 pb-6">
@@ -472,46 +472,89 @@ const TourDetails = () => {
                     </button>
                   </div>
                 </div>
-                {tour?.id === '12' && (
+                {(tour?.id === '12' || tour?.id === '14') && (
                   <div>
                     <label className="block text-gray-700 font-medium mb-3">Select Date</label>
                     <div className="grid grid-cols-2 gap-3">
-                      <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '18 December'
-                        ? 'border-orange-500 bg-orange-50 shadow-md'
-                        : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
-                        }`}>
-                        <input
-                          type="radio"
-                          name="date"
-                          value="18 December"
-                          checked={form.date === '18 December'}
-                          onChange={handleFormChange}
-                          className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
-                          required
-                        />
-                        <span className={`ml-3 font-medium ${form.date === '18 December'
-                          ? 'text-orange-600 font-semibold'
-                          : 'text-gray-700 group-hover:text-orange-600'
-                          }`}>18 December</span>
-                      </label>
-                      <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '28 January'
-                        ? 'border-orange-500 bg-orange-50 shadow-md'
-                        : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
-                        }`}>
-                        <input
-                          type="radio"
-                          name="date"
-                          value="28 January"
-                          checked={form.date === '28 January'}
-                          onChange={handleFormChange}
-                          className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
-                          required
-                        />
-                        <span className={`ml-3 font-medium ${form.date === '28 January'
-                          ? 'text-orange-600 font-semibold'
-                          : 'text-gray-700 group-hover:text-orange-600'
-                          }`}>28 January</span>
-                      </label>
+                      {tour?.id === '12' ? (
+                        <>
+                          <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '18 December'
+                            ? 'border-orange-500 bg-orange-50 shadow-md'
+                            : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
+                            }`}>
+                            <input
+                              type="radio"
+                              name="date"
+                              value="18 December"
+                              checked={form.date === '18 December'}
+                              onChange={handleFormChange}
+                              className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
+                              required
+                            />
+                            <span className={`ml-3 font-medium ${form.date === '18 December'
+                              ? 'text-orange-600 font-semibold'
+                              : 'text-gray-700 group-hover:text-orange-600'
+                              }`}>18 December</span>
+                          </label>
+                          <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '28 January'
+                            ? 'border-orange-500 bg-orange-50 shadow-md'
+                            : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
+                            }`}>
+                            <input
+                              type="radio"
+                              name="date"
+                              value="28 January"
+                              checked={form.date === '28 January'}
+                              onChange={handleFormChange}
+                              className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
+                              required
+                            />
+                            <span className={`ml-3 font-medium ${form.date === '28 January'
+                              ? 'text-orange-600 font-semibold'
+                              : 'text-gray-700 group-hover:text-orange-600'
+                              }`}>28 January</span>
+                          </label>
+                        </>
+                      ) : (
+                        <>
+                          <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '28 January'
+                            ? 'border-orange-500 bg-orange-50 shadow-md'
+                            : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
+                            }`}>
+                            <input
+                              type="radio"
+                              name="date"
+                              value="28 January"
+                              checked={form.date === '28 January'}
+                              onChange={handleFormChange}
+                              className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
+                              required
+                            />
+                            <span className={`ml-3 font-medium ${form.date === '28 January'
+                              ? 'text-orange-600 font-semibold'
+                              : 'text-gray-700 group-hover:text-orange-600'
+                              }`}>28 Jan</span>
+                          </label>
+                          <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '5 February'
+                            ? 'border-orange-500 bg-orange-50 shadow-md'
+                            : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
+                            }`}>
+                            <input
+                              type="radio"
+                              name="date"
+                              value="5 February"
+                              checked={form.date === '5 February'}
+                              onChange={handleFormChange}
+                              className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
+                              required
+                            />
+                            <span className={`ml-3 font-medium ${form.date === '5 February'
+                              ? 'text-orange-600 font-semibold'
+                              : 'text-gray-700 group-hover:text-orange-600'
+                              }`}>5 Feb</span>
+                          </label>
+                        </>
+                      )}
                     </div>
                   </div>
                 )}

@@ -653,7 +653,7 @@ export const tours: Tour[] = [
     maxGuests: 20,
     featured: true,
     special: true,
-    tourDate: '28th-31th January',
+    tourDate: '28-31 Jan & 5-8 Feb',
     itinerary: [
       'DAY 1 – ARRIVAL & NUBIAN VIBES',
       'Arrival in Aswan and private pick-up from the train station',
@@ -685,7 +685,7 @@ export const tours: Tour[] = [
       '',
       'DAY 4 – DEPARTURE',
       'Breakfast',
-      'Luxor Overday & Hot Air Balloon (Optional) - 4400 EGP',
+      'Luxor Overday & Hot Air Balloon (Optional) - 4400 EGP (+ 45$ for foreigners)',
       '• Hot Air Balloon - Luxor Temple - Karnak Temple - Hatshepsut Temple - Valley of the Kings - Colossi of Memnon',
       'Abu Simbel visit (Optional) - 1700 EGP',
       'Check-out',
