@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, MapPin, Clock, Users, Star, Calendar, CheckCircle, XCircle, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getTourBySlug, getTourSlug } from '../data/tours';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import staticOgImage from '../assets/nuba luxury escape.jpeg';
 
 const TourDetails = () => {

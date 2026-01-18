@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Clock, Star, Users, ArrowRight, Share2, Calendar, Award, Check } from 'lucide-react';
+import { MapPin, Clock, Users, ArrowRight, Share2, Calendar, Award, Check } from 'lucide-react';
 import { getToursByCity, Tour, getTourSlug } from '../data/tours';
 import { Link } from 'react-router-dom';
 
@@ -106,10 +106,7 @@ const TourCard = ({ tour }: { tour: Tour }) => {
             <MapPin className="w-4 h-4 mr-1 text-orange-500" />
             <span>{tour.location}</span>
           </div>
-          <div className="flex items-center space-x-1 bg-yellow-50 px-3 py-1 rounded-full">
-            <Star className="w-4 h-4 text-yellow-400 fill-current" />
-            <span className="text-sm font-bold text-gray-800">{tour.rating}</span>
-          </div>
+
         </div>
 
         {/* Title */}

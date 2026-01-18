@@ -1,9 +1,9 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Filter, Search, MapPin, Heart, ArrowRight, Sparkles } from 'lucide-react';
 import TourCard from '../components/TourCard';
 import { cities, getToursByCity } from '../data/tours';
 import { useLocation } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import staticOgImage from '../assets/nuba luxury escape.jpeg';
 
 const Tours = () => {
@@ -23,7 +23,6 @@ const Tours = () => {
   }, [location.search]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   const filteredTours = useMemo(() => {
     let tours = getToursByCity(selectedCity);
@@ -166,15 +165,7 @@ const Tours = () => {
       {/* Enhanced Tours Grid */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {isLoading ? (
-            <div className="text-center py-16">
-              <div className="relative">
-                <div className="animate-spin rounded-full h-16 w-16 border-4 border-orange-500 border-t-transparent mx-auto"></div>
-                <div className="absolute inset-0 animate-ping rounded-full h-16 w-16 border-4 border-orange-300 border-t-transparent mx-auto opacity-20"></div>
-              </div>
-              <p className="text-gray-600 mt-6 text-lg">Loading amazing tours...</p>
-            </div>
-          ) : filteredTours.length === 0 ? (
+          {filteredTours.length === 0 ? (
             <div className="text-center py-16">
               <div className="relative mb-8">
                 <div className="text-gray-300 text-8xl mb-4">🏺</div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Clock, Star, Users, Share2, ArrowRight, Sparkles, Check } from 'lucide-react';
+import { MapPin, Clock, Users, Share2, ArrowRight, Sparkles, Check } from 'lucide-react';
 import { getTourSlug, Tour } from '../data/tours';
 
 interface TourCardProps {
@@ -86,14 +86,7 @@ const TourCard: React.FC<TourCardProps> = ({ tour }) => {
           className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
         />
 
-        {/* Rating Badge */}
-        <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-2xl px-3 py-2 shadow-lg z-20">
-          <div className="flex items-center space-x-1">
-            <Star className="w-4 h-4 text-yellow-400 fill-current" />
-            <span className="text-sm font-bold text-gray-800">{tour.rating}</span>
-            <span className="text-xs text-gray-500">/ 5</span>
-          </div>
-        </div>
+
 
         {/* Price Badge */}
         <div className="absolute bottom-4 right-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-2xl px-4 py-2 shadow-lg z-20">

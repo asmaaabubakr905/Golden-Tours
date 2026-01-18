@@ -685,8 +685,9 @@ export const tours: Tour[] = [
       '',
       'DAY 4 – DEPARTURE',
       'Breakfast',
-      'Luxor Overday & Hot Air Balloon (Optional) - 4400 EGP (+ 45$ for foreigners)',
+      'Luxor Overday & Hot Air Balloon (Optional) - 4400 EGP',
       '• Hot Air Balloon - Luxor Temple - Karnak Temple - Hatshepsut Temple - Valley of the Kings - Colossi of Memnon',
+      'Foreigners extra supplement 45$ for Luxor overday',
       'Abu Simbel visit (Optional) - 1700 EGP',
       'Check-out',
       'Drop-off at the train station',
@@ -797,14 +798,10 @@ export const tours: Tour[] = [
 
 export const cities = ['All', 'Cairo', 'Alexandria', 'Luxor', 'Aswan', 'New Valley'];
 
-export const getFeaturedTours = () => tours.filter(tour => tour.featured);
+export const getFeaturedTours = () => [...tours].reverse().filter(tour => tour.featured);
 export const getToursByCity = (city: string) => {
-  let result = city === 'All' ? tours : tours.filter(tour => tour.city === city);
-  // Reverse order for Aswan tours so newest appear first
-  if (city === 'Aswan') {
-    result = [...result].reverse();
-  }
-  return result;
+  const result = city === 'All' ? tours : tours.filter(tour => tour.city === city);
+  return [...result].reverse();
 };
 export const getTourBySlug = (slug: string) =>
   tours.find(tour => getTourSlug(tour) === slug || tour.id === slug);
