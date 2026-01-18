@@ -718,7 +718,9 @@ const TourDetails = () => {
                           if (isSupplement) {
                             return (
                               <div key={index} className="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg shadow-sm">
-                                <p className="text-yellow-800 font-medium text-sm">{item}</p>
+                                <p className={`text-yellow-800 font-medium ${item.includes('Luxor overday') ? 'text-xs' : 'text-sm'}`}>
+                                  {item}
+                                </p>
                               </div>
                             );
                           }
@@ -766,7 +768,16 @@ const TourDetails = () => {
                                 <div className="flex-shrink-0 w-8 h-8"></div>
                               )}
                               <p className={`text-gray-700 ${isSubItem ? 'pt-1' : 'pt-1'} ${isSubItem ? 'font-medium' : ''} ${isVisitHeader ? 'font-semibold text-orange-600' : ''}`}>
-                                {item}
+                                {item.split(/(\[\[.*?\]\])/g).map((part, i) => {
+                                  if (part.startsWith('[[') && part.endsWith(']]')) {
+                                    return (
+                                      <span key={i} className="inline-block ml-2 bg-yellow-100 text-yellow-800 text-[10px] px-2 py-0.5 rounded-full font-bold border border-yellow-200 align-middle">
+                                        {part.slice(2, -2)}
+                                      </span>
+                                    );
+                                  }
+                                  return part;
+                                })}
                               </p>
                             </div>
                           );
