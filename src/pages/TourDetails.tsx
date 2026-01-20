@@ -317,15 +317,15 @@ const TourDetails = () => {
       {/* Image Lightbox Modal */}
       {selectedImageIndex !== null && tour.galleryImages && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-2 sm:p-4"
           onClick={() => setSelectedImageIndex(null)}
         >
           <button
             onClick={() => setSelectedImageIndex(null)}
-            className="absolute top-4 right-4 text-white hover:text-orange-400 transition-colors z-10 bg-black/50 rounded-full p-2"
+            className="absolute top-2 sm:top-4 right-2 sm:right-4 text-white hover:text-orange-400 transition-colors z-10 bg-black/50 rounded-full p-1.5 sm:p-2"
             aria-label="Close"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           {tour.galleryImages.length > 1 && (
@@ -337,10 +337,10 @@ const TourDetails = () => {
                     prev !== null && prev > 0 ? prev - 1 : (tour.galleryImages?.length || 1) - 1
                   );
                 }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-orange-400 transition-colors z-10 bg-black/50 rounded-full p-3 hover:bg-black/70"
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white hover:text-orange-400 transition-colors z-10 bg-black/50 rounded-full p-2 sm:p-3 hover:bg-black/70"
                 aria-label="Previous image"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
               <button
                 onClick={(e) => {
@@ -349,10 +349,10 @@ const TourDetails = () => {
                     prev !== null && prev < (tour.galleryImages?.length || 1) - 1 ? prev + 1 : 0
                   );
                 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-orange-400 transition-colors z-10 bg-black/50 rounded-full p-3 hover:bg-black/70"
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white hover:text-orange-400 transition-colors z-10 bg-black/50 rounded-full p-2 sm:p-3 hover:bg-black/70"
                 aria-label="Next image"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
             </>
           )}
@@ -365,7 +365,7 @@ const TourDetails = () => {
                   alt={`${tour.title} - Image ${selectedImageIndex + 1}`}
                   className="max-w-full max-h-full object-contain rounded-lg"
                 />
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm">
+                <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm">
                   {selectedImageIndex + 1} / {tour.galleryImages.length}
                 </div>
               </>
@@ -386,12 +386,12 @@ const TourDetails = () => {
           }}
         >
           <div
-            className="bg-gradient-to-br from-white via-orange-50 to-amber-50 rounded-3xl shadow-2xl w-full max-w-md max-h-[90vh] flex flex-col relative animate-fadeIn border border-orange-100"
+            className="bg-gradient-to-br from-white via-orange-50 to-amber-50 rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-md max-h-[90vh] flex flex-col relative animate-fadeIn border border-orange-100 mx-2 sm:mx-0"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex-shrink-0 p-6 pb-2">
+            <div className="flex-shrink-0 p-4 sm:p-6 pb-2">
               <button
-                className="absolute top-4 right-4 text-gray-400 hover:text-orange-500 transition-colors z-10 bg-white rounded-full p-1 shadow-sm"
+                className="absolute top-3 sm:top-4 right-3 sm:right-4 text-gray-400 hover:text-orange-500 transition-colors z-10 bg-white rounded-full p-1 shadow-sm"
                 onClick={() => {
                   setShowModal(false);
                   setSubmitSuccess(false);
@@ -400,10 +400,10 @@ const TourDetails = () => {
                 }}
                 aria-label="Close"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
-              <h2 className="text-2xl font-bold text-orange-500 mb-1 text-center pr-8">Book This Tour</h2>
-              <p className="text-gray-600 text-center mb-2">Fill in your details and we will contact you soon.</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-orange-500 mb-1 text-center pr-8">Book This Tour</h2>
+              <p className="text-sm sm:text-base text-gray-600 text-center mb-2">Fill in your details and we will contact you soon.</p>
             </div>
             {submitSuccess ? (
               <div className="flex-1 flex items-center justify-center px-6 pb-6">
@@ -416,57 +416,57 @@ const TourDetails = () => {
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleFormSubmit} className="flex-1 overflow-y-auto px-6 pb-6 space-y-4 min-h-0">
+              <form onSubmit={handleFormSubmit} className="flex-1 overflow-y-auto px-4 sm:px-6 pb-4 sm:pb-6 space-y-3 sm:space-y-4 min-h-0">
                 <div>
-                  <label className="block text-gray-700 font-medium mb-1">Tour</label>
+                  <label className="block text-gray-700 font-medium mb-1 text-sm sm:text-base">Tour</label>
                   <input
                     type="text"
                     value={tour.title}
                     readOnly
-                    className="w-full px-4 py-2 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 font-semibold focus:outline-none focus:ring-2 focus:ring-orange-400"
+                    className="w-full px-3 sm:px-4 py-2 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 font-semibold text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-orange-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 font-medium mb-1">Name</label>
+                  <label className="block text-gray-700 font-medium mb-1 text-sm sm:text-base">Name</label>
                   <input
                     type="text"
                     name="name"
                     value={form.name}
                     onChange={handleFormChange}
-                    className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                    className="w-full px-3 sm:px-4 py-2 rounded-lg border border-gray-200 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-orange-400"
                     placeholder="Your Name"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 font-medium mb-1">Phone</label>
+                  <label className="block text-gray-700 font-medium mb-1 text-sm sm:text-base">Phone</label>
                   <input
                     type="tel"
                     name="phone"
                     value={form.phone}
                     onChange={handleFormChange}
-                    className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                    className="w-full px-3 sm:px-4 py-2 rounded-lg border border-gray-200 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-orange-400"
                     placeholder="Your Phone Number"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 font-medium mb-1">Guests</label>
-                  <div className="flex items-center justify-between space-x-3">
+                  <label className="block text-gray-700 font-medium mb-1 text-sm sm:text-base">Guests</label>
+                  <div className="flex items-center justify-between space-x-2 sm:space-x-3">
                     <button
                       type="button"
                       onClick={() => adjustGuests(-1)}
-                      className="w-12 h-12 flex items-center justify-center rounded-full border border-gray-300 text-gray-700 text-xl font-bold hover:bg-gray-50 transition"
+                      className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full border border-gray-300 text-gray-700 text-lg sm:text-xl font-bold hover:bg-gray-50 transition"
                     >
                       –
                     </button>
-                    <div className="flex-1 text-center py-3 px-4 rounded-full border border-gray-300 bg-white text-gray-800 text-lg font-semibold">
+                    <div className="flex-1 text-center py-2 sm:py-3 px-3 sm:px-4 rounded-full border border-gray-300 bg-white text-gray-800 text-base sm:text-lg font-semibold">
                       {form.guests}
                     </div>
                     <button
                       type="button"
                       onClick={() => adjustGuests(1)}
-                      className="w-12 h-12 flex items-center justify-center rounded-full border border-gray-300 text-gray-700 text-xl font-bold hover:bg-gray-50 transition"
+                      className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full border border-gray-300 text-gray-700 text-lg sm:text-xl font-bold hover:bg-gray-50 transition"
                     >
                       +
                     </button>
@@ -474,11 +474,11 @@ const TourDetails = () => {
                 </div>
                 {(tour?.id === '12' || tour?.id === '14') && (
                   <div>
-                    <label className="block text-gray-700 font-medium mb-3">Select Date</label>
-                    <div className="grid grid-cols-2 gap-3">
+                    <label className="block text-gray-700 font-medium mb-2 sm:mb-3 text-sm sm:text-base">Select Date</label>
+                    <div className="grid grid-cols-2 gap-2 sm:gap-3">
                       {tour?.id === '12' ? (
                         <>
-                          <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '18 December'
+                          <label className={`flex items-center justify-center p-3 sm:p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '18 December'
                             ? 'border-orange-500 bg-orange-50 shadow-md'
                             : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
                             }`}>
@@ -488,15 +488,15 @@ const TourDetails = () => {
                               value="18 December"
                               checked={form.date === '18 December'}
                               onChange={handleFormChange}
-                              className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
+                              className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
                               required
                             />
-                            <span className={`ml-3 font-medium ${form.date === '18 December'
+                            <span className={`ml-2 sm:ml-3 font-medium text-xs sm:text-sm ${form.date === '18 December'
                               ? 'text-orange-600 font-semibold'
                               : 'text-gray-700 group-hover:text-orange-600'
-                              }`}>18 December</span>
+                              }`}>18 Dec</span>
                           </label>
-                          <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '28 January'
+                          <label className={`flex items-center justify-center p-3 sm:p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '28 January'
                             ? 'border-orange-500 bg-orange-50 shadow-md'
                             : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
                             }`}>
@@ -506,36 +506,36 @@ const TourDetails = () => {
                               value="28 January"
                               checked={form.date === '28 January'}
                               onChange={handleFormChange}
-                              className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
+                              className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
                               required
                             />
-                            <span className={`ml-3 font-medium ${form.date === '28 January'
-                              ? 'text-orange-600 font-semibold'
-                              : 'text-gray-700 group-hover:text-orange-600'
-                              }`}>28 January</span>
-                          </label>
-                        </>
-                      ) : (
-                        <>
-                          <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '28 January'
-                            ? 'border-orange-500 bg-orange-50 shadow-md'
-                            : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
-                            }`}>
-                            <input
-                              type="radio"
-                              name="date"
-                              value="28 January"
-                              checked={form.date === '28 January'}
-                              onChange={handleFormChange}
-                              className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
-                              required
-                            />
-                            <span className={`ml-3 font-medium ${form.date === '28 January'
+                            <span className={`ml-2 sm:ml-3 font-medium text-xs sm:text-sm ${form.date === '28 January'
                               ? 'text-orange-600 font-semibold'
                               : 'text-gray-700 group-hover:text-orange-600'
                               }`}>28 Jan</span>
                           </label>
-                          <label className={`flex items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '5 February'
+                        </>
+                      ) : (
+                        <>
+                          <label className={`flex items-center justify-center p-3 sm:p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '28 January'
+                            ? 'border-orange-500 bg-orange-50 shadow-md'
+                            : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
+                            }`}>
+                            <input
+                              type="radio"
+                              name="date"
+                              value="28 January"
+                              checked={form.date === '28 January'}
+                              onChange={handleFormChange}
+                              className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
+                              required
+                            />
+                            <span className={`ml-2 sm:ml-3 font-medium text-xs sm:text-sm ${form.date === '28 January'
+                              ? 'text-orange-600 font-semibold'
+                              : 'text-gray-700 group-hover:text-orange-600'
+                              }`}>28 Jan</span>
+                          </label>
+                          <label className={`flex items-center justify-center p-3 sm:p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group ${form.date === '5 February'
                             ? 'border-orange-500 bg-orange-50 shadow-md'
                             : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50'
                             }`}>
@@ -545,10 +545,10 @@ const TourDetails = () => {
                               value="5 February"
                               checked={form.date === '5 February'}
                               onChange={handleFormChange}
-                              className="w-5 h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
+                              className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 border-gray-300 focus:ring-orange-500 focus:ring-2"
                               required
                             />
-                            <span className={`ml-3 font-medium ${form.date === '5 February'
+                            <span className={`ml-2 sm:ml-3 font-medium text-xs sm:text-sm ${form.date === '5 February'
                               ? 'text-orange-600 font-semibold'
                               : 'text-gray-700 group-hover:text-orange-600'
                               }`}>5 Feb</span>
@@ -558,15 +558,15 @@ const TourDetails = () => {
                     </div>
                   </div>
                 )}
-                {formError && <div className="text-red-500 text-sm text-center">{formError}</div>}
+                {formError && <div className="text-red-500 text-xs sm:text-sm text-center">{formError}</div>}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-lg font-semibold text-lg shadow-lg hover:from-orange-600 hover:to-orange-700 transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-2.5 sm:py-3 rounded-lg font-semibold text-base sm:text-lg shadow-lg hover:from-orange-600 hover:to-orange-700 transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      <div className="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 border-b-2 border-white mr-2"></div>
                       Submitting...
                     </>
                   ) : (
@@ -577,7 +577,7 @@ const TourDetails = () => {
                   href="https://ipn.eg/S/amrabouzied7/instapay/6QCON8"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center bg-white text-orange-600 border border-orange-200 py-3 rounded-lg font-semibold text-lg shadow-sm hover:bg-orange-50 transition-all"
+                  className="w-full inline-flex items-center justify-center bg-white text-orange-600 border border-orange-200 py-2.5 sm:py-3 rounded-lg font-semibold text-base sm:text-lg shadow-sm hover:bg-orange-50 transition-all"
                 >
                   Pay via InstaPay
                 </a>
@@ -587,7 +587,7 @@ const TourDetails = () => {
         </div>
       )}
       {/* Hero Section */}
-      <section className="relative h-96 bg-gray-900 rounded-b-3xl overflow-hidden shadow-xl">
+      <section className="relative h-64 sm:h-80 md:h-96 bg-gray-900 rounded-b-3xl overflow-hidden shadow-xl">
         <img
           src={tour.image}
           alt={tour.title}
@@ -598,19 +598,19 @@ const TourDetails = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <Link
               to={`/tours?city=${encodeURIComponent(tour.city)}`}
-              className="inline-flex items-center text-white hover:text-orange-300 transition-colors mb-4 drop-shadow-lg"
+              className="inline-flex items-center text-white hover:text-orange-300 transition-colors mb-3 sm:mb-4 drop-shadow-lg text-sm sm:text-base"
             >
-              <ArrowLeft className="w-5 h-5 mr-2" />
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
               Back to Tours
             </Link>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-lg">{tour.title}</h1>
-            <div className="flex flex-wrap items-center text-white space-x-6 drop-shadow-lg">
-              <div className="flex items-center space-x-2">
-                <MapPin className="w-5 h-5" />
-                <span>{tour.location}</span>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-3 sm:mb-4 drop-shadow-lg leading-tight">{tour.title}</h1>
+            <div className="flex flex-wrap items-center text-white gap-3 sm:gap-4 md:gap-6 drop-shadow-lg text-xs sm:text-sm md:text-base">
+              <div className="flex items-center space-x-1 sm:space-x-2">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                <span className="break-words">{tour.location}</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <Clock className="w-5 h-5" />
+              <div className="flex items-center space-x-1 sm:space-x-2">
+                <Clock className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                 <span>{tour.duration}</span>
               </div>
               {/* {tour.tourDate && (
@@ -619,12 +619,12 @@ const TourDetails = () => {
                   <span className="font-semibold">{tour.tourDate}</span>
                 </div>
               )} */}
-              <div className="flex items-center space-x-2">
-                <Star className="w-5 h-5 text-yellow-400 fill-current" />
+              <div className="flex items-center space-x-1 sm:space-x-2">
+                <Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current flex-shrink-0" />
                 <span>{tour.rating} ({reviewsCount} reviews)</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <Users className="w-5 h-5" />
+              <div className="flex items-center space-x-1 sm:space-x-2">
+                <Users className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                 <span>Max {tour.maxGuests}</span>
               </div>
             </div>
@@ -633,23 +633,32 @@ const TourDetails = () => {
       </section>
 
       {/* Content Section */}
-      <section className="py-12">
+      <section className="py-6 sm:py-8 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Main Content */}
             <div className="lg:col-span-2">
               {/* Tabs */}
-              <div className="border-b border-orange-200 mb-8 bg-orange-50 rounded-xl shadow-sm px-2">
-                <nav className="flex space-x-4 sm:space-x-8 py-2">
+              <div className="border-b border-orange-200 mb-6 sm:mb-8 bg-orange-50 rounded-xl shadow-sm px-2 sm:px-3 overflow-hidden">
+                <nav className="flex space-x-2 sm:space-x-3 md:space-x-4 lg:space-x-8 py-2">
                   {[
-                    { id: 'overview', label: <><CheckCircle className='inline w-5 h-5 mr-1 text-orange-500' /> Overview</> },
-                    { id: 'itinerary', label: <><Calendar className='inline w-5 h-5 mr-1 text-orange-500' /> Itinerary</> },
-                    { id: 'includes', label: <><Star className='inline w-5 h-5 mr-1 text-orange-500' /> Includes/Excludes</> }
+                    { 
+                      id: 'overview', 
+                      label: <><CheckCircle className='inline w-4 h-4 sm:w-5 sm:h-5 mr-1 text-orange-500' /> Accommodations</>
+                    },
+                    { 
+                      id: 'itinerary', 
+                      label: <><Calendar className='inline w-4 h-4 sm:w-5 sm:h-5 mr-1 text-orange-500' /> Itinerary</>
+                    },
+                    { 
+                      id: 'includes', 
+                      label: <><Star className='inline w-4 h-4 sm:w-5 sm:h-5 mr-1 text-orange-500' /> Includes/Excludes</>
+                    }
                   ].map(tab => (
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`py-3 px-4 rounded-lg font-medium text-sm transition-all duration-200 shadow-sm
+                      className={`py-2 sm:py-3 px-2 sm:px-3 md:px-4 rounded-lg font-medium text-[10px] sm:text-xs md:text-sm transition-all duration-200 shadow-sm whitespace-nowrap flex-shrink
                         ${activeTab === tab.id
                           ? 'bg-gradient-to-r from-orange-500 to-orange-400 text-white shadow-md'
                           : 'bg-white text-orange-500 hover:bg-orange-100 border border-orange-100'}
@@ -663,12 +672,12 @@ const TourDetails = () => {
 
               {/* Gallery Section - Only for tours with galleryImages */}
               {activeTab === 'overview' && tour.galleryImages && tour.galleryImages.length > 0 && (
-                <div className="mb-8">
-                  <h3 className="text-2xl font-bold text-orange-500 mb-6 flex items-center">
-                    <Star className="w-6 h-6 mr-2 text-orange-400" />
+                <div className="mb-6 sm:mb-8">
+                  <h3 className="text-xl sm:text-2xl font-bold text-orange-500 mb-4 sm:mb-6 flex items-center">
+                    <Star className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-orange-400" />
                     Photo Gallery
                   </h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
                     {tour.galleryImages.map((img, index) => (
                       <div
                         key={index}
@@ -684,25 +693,25 @@ const TourDetails = () => {
                       </div>
                     ))}
                   </div>
-                  <p className="text-sm text-gray-500 mt-4 text-center">
+                  <p className="text-xs sm:text-sm text-gray-500 mt-3 sm:mt-4 text-center">
                     Click on any image to view in full size
                   </p>
                 </div>
               )}
 
               {/* Tab Content */}
-              <div className="prose prose-lg max-w-none">
+              <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
                 {activeTab === 'overview' && (
                   <div>
-                    <h3 className="text-2xl font-bold text-orange-500 mb-4 flex items-center"><CheckCircle className="w-6 h-6 mr-2 text-orange-400" />Tour Overview</h3>
-                    <p className="text-gray-700 mb-6">{tour.fullDescription}</p>
+                    <h3 className="text-xl sm:text-2xl font-bold text-orange-500 mb-3 sm:mb-4 flex items-center"><CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-orange-400" />Tour Overview</h3>
+                    <p className="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">{tour.fullDescription}</p>
                   </div>
                 )}
 
                 {activeTab === 'itinerary' && (
                   <div>
-                    <h3 className="text-2xl font-bold text-orange-500 mb-4 flex items-center"><Calendar className="w-6 h-6 mr-2 text-orange-400" />Daily Itinerary</h3>
-                    <div className="space-y-4">
+                    <h3 className="text-xl sm:text-2xl font-bold text-orange-500 mb-3 sm:mb-4 flex items-center"><Calendar className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-orange-400" />Daily Itinerary</h3>
+                    <div className="space-y-3 sm:space-y-4">
                       {(() => {
                         let itemNumber = 0;
                         return tour.itinerary.map((item, index) => {
@@ -717,8 +726,8 @@ const TourDetails = () => {
 
                           if (isSupplement) {
                             return (
-                              <div key={index} className="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg shadow-sm">
-                                <p className={`text-yellow-800 font-medium ${item.includes('Luxor overday') ? 'text-xs' : 'text-sm'}`}>
+                              <div key={index} className="mt-3 sm:mt-4 p-3 sm:p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg shadow-sm">
+                                <p className={`text-yellow-800 font-medium ${item.includes('Luxor overday') ? 'text-xs' : 'text-xs sm:text-sm'}`}>
                                   {item}
                                 </p>
                               </div>
@@ -729,13 +738,13 @@ const TourDetails = () => {
                             const dayNumber = dayHeaderMatch[2];
                             const dayText = dayHeaderMatch[3] || '';
                             return (
-                              <div key={index} className="mt-6 mb-4">
-                                <div className="flex items-center space-x-3">
-                                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-orange-500 to-amber-600 text-white rounded-xl flex items-center justify-center text-lg font-bold shadow-lg">
+                              <div key={index} className="mt-4 sm:mt-6 mb-3 sm:mb-4">
+                                <div className="flex items-center space-x-2 sm:space-x-3">
+                                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-orange-500 to-amber-600 text-white rounded-xl flex items-center justify-center text-base sm:text-lg font-bold shadow-lg">
                                     Day {dayNumber}
                                   </div>
                                   {dayText && (
-                                    <div className="text-sm font-semibold text-gray-700 mr-2">
+                                    <div className="text-xs sm:text-sm font-semibold text-gray-700 mr-2">
                                       {dayText}
                                     </div>
                                   )}
@@ -755,9 +764,9 @@ const TourDetails = () => {
                           }
 
                           return (
-                            <div key={index} className={`flex items-start space-x-3 ${isSubItem ? 'ml-8' : ''}`}>
+                            <div key={index} className={`flex items-start space-x-2 sm:space-x-3 ${isSubItem ? 'ml-4 sm:ml-8' : ''}`}>
                               {!isSubItem && !isVisitHeader && (
-                                <div className="flex-shrink-0 w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-medium shadow">
+                                <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs sm:text-sm font-medium shadow">
                                   {itemNumber}
                                 </div>
                               )}
@@ -765,13 +774,13 @@ const TourDetails = () => {
                                 <div className="flex-shrink-0 w-2 h-2 bg-orange-500 rounded-full mt-2"></div>
                               )}
                               {isVisitHeader && (
-                                <div className="flex-shrink-0 w-8 h-8"></div>
+                                <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8"></div>
                               )}
-                              <p className={`text-gray-700 ${isSubItem ? 'pt-1' : 'pt-1'} ${isSubItem ? 'font-medium' : ''} ${isVisitHeader ? 'font-semibold text-orange-600' : ''}`}>
+                              <p className={`text-gray-700 text-sm sm:text-base ${isSubItem ? 'pt-1' : 'pt-1'} ${isSubItem ? 'font-medium' : ''} ${isVisitHeader ? 'font-semibold text-orange-600' : ''} leading-relaxed`}>
                                 {item.split(/(\[\[.*?\]\])/g).map((part, i) => {
                                   if (part.startsWith('[[') && part.endsWith(']]')) {
                                     return (
-                                      <span key={i} className="inline-block ml-2 bg-yellow-100 text-yellow-800 text-[10px] px-2 py-0.5 rounded-full font-bold border border-yellow-200 align-middle">
+                                      <span key={i} className="inline-block ml-1 sm:ml-2 bg-yellow-100 text-yellow-800 text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full font-bold border border-yellow-200 align-middle">
                                         {part.slice(2, -2)}
                                       </span>
                                     );
@@ -789,31 +798,31 @@ const TourDetails = () => {
 
                 {activeTab === 'includes' && (
                   <div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                       <div>
-                        <h3 className="text-xl font-bold text-orange-500 mb-4 flex items-center">
-                          <CheckCircle className="w-6 h-6 text-green-500 mr-2" />
+                        <h3 className="text-lg sm:text-xl font-bold text-orange-500 mb-3 sm:mb-4 flex items-center">
+                          <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-2" />
                           Includes
                         </h3>
                         <ul className="space-y-2">
                           {tour.includes.map((item, index) => (
-                            <li key={index} className="flex items-start space-x-3">
-                              <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                              <span className="text-gray-700">{item}</span>
+                            <li key={index} className="flex items-start space-x-2 sm:space-x-3">
+                              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                              <span className="text-gray-700 text-sm sm:text-base">{item}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-orange-500 mb-4 flex items-center">
-                          <XCircle className="w-6 h-6 text-red-500 mr-2" />
+                        <h3 className="text-lg sm:text-xl font-bold text-orange-500 mb-3 sm:mb-4 flex items-center">
+                          <XCircle className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 mr-2" />
                           Excludes
                         </h3>
                         <ul className="space-y-2">
                           {tour.excludes.map((item, index) => (
-                            <li key={index} className="flex items-start space-x-3">
-                              <XCircle className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-                              <span className="text-gray-700">{item}</span>
+                            <li key={index} className="flex items-start space-x-2 sm:space-x-3">
+                              <XCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-500 mt-0.5 flex-shrink-0" />
+                              <span className="text-gray-700 text-sm sm:text-base">{item}</span>
                             </li>
                           ))}
                         </ul>
@@ -826,49 +835,49 @@ const TourDetails = () => {
 
             {/* Sidebar */}
             <div className="lg:col-span-1">
-              <div className="bg-white border border-orange-200 rounded-2xl p-8 sticky top-24 shadow-xl">
-                <div className="text-center mb-6">
-                  <div className="text-3xl font-bold text-orange-500 mb-2">
+              <div className="bg-white border border-orange-200 rounded-2xl p-4 sm:p-6 md:p-8 lg:sticky lg:top-24 shadow-xl">
+                <div className="text-center mb-4 sm:mb-6">
+                  <div className="text-2xl sm:text-3xl font-bold text-orange-500 mb-2">
                     {tour.special ? `${tour.price.toLocaleString()} EGP` : `$${tour.price}`}
-                    <span className="text-lg font-normal text-gray-500"> /person</span>
+                    <span className="text-base sm:text-lg font-normal text-gray-500"> /person</span>
                   </div>
-                  <div className="flex items-center justify-center space-x-1 text-sm text-gray-600">
-                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                  <div className="flex items-center justify-center space-x-1 text-xs sm:text-sm text-gray-600">
+                    <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />
                     <span>{tour.rating} ({reviewsCount} reviews)</span>
                   </div>
                 </div>
 
-                <div className="space-y-4 mb-6">
+                <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
                   {tour.tourDate && (
-                    <div className="flex items-center justify-between py-2 border-b border-orange-100 bg-orange-50 px-4 py-3 rounded-lg">
-                      <span className="text-gray-700 flex items-center font-semibold"><Calendar className="w-4 h-4 mr-1 text-orange-500" />Tour Date</span>
-                      <span className="font-bold text-orange-600">{tour.tourDate}</span>
+                    <div className="flex items-center justify-between py-2 border-b border-orange-100 bg-orange-50 px-3 sm:px-4 py-2 sm:py-3 rounded-lg">
+                      <span className="text-gray-700 flex items-center font-semibold text-sm sm:text-base"><Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-1 text-orange-500" />Tour Date</span>
+                      <span className="font-bold text-orange-600 text-sm sm:text-base">{tour.tourDate}</span>
                     </div>
                   )}
                   <div className="flex items-center justify-between py-2 border-b border-orange-100">
-                    <span className="text-gray-600 flex items-center"><Clock className="w-4 h-4 mr-1 text-orange-400" />Duration</span>
-                    <span className="font-medium">{tour.duration}</span>
+                    <span className="text-gray-600 flex items-center text-sm sm:text-base"><Clock className="w-3 h-3 sm:w-4 sm:h-4 mr-1 text-orange-400" />Duration</span>
+                    <span className="font-medium text-sm sm:text-base">{tour.duration}</span>
                   </div>
                   <div className="flex items-center justify-between py-2 border-b border-orange-100">
-                    <span className="text-gray-600 flex items-center"><Users className="w-4 h-4 mr-1 text-orange-400" />Max Guests</span>
-                    <span className="font-medium">{tour.maxGuests} people</span>
+                    <span className="text-gray-600 flex items-center text-sm sm:text-base"><Users className="w-3 h-3 sm:w-4 sm:h-4 mr-1 text-orange-400" />Max Guests</span>
+                    <span className="font-medium text-sm sm:text-base">{tour.maxGuests} people</span>
                   </div>
                   <div className="flex items-center justify-between py-2 border-b border-orange-100">
-                    <span className="text-gray-600 flex items-center"><MapPin className="w-4 h-4 mr-1 text-orange-400" />Location</span>
-                    <span className="font-medium">{tour.location}</span>
+                    <span className="text-gray-600 flex items-center text-sm sm:text-base"><MapPin className="w-3 h-3 sm:w-4 sm:h-4 mr-1 text-orange-400" />Location</span>
+                    <span className="font-medium text-sm sm:text-base break-words text-right">{tour.location}</span>
                   </div>
                 </div>
 
                 <button
                   onClick={handleBooking}
-                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 px-6 rounded-xl text-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-colors flex items-center justify-center space-x-2 shadow-lg"
+                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-2.5 sm:py-3 px-4 sm:px-6 rounded-xl text-base sm:text-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-colors flex items-center justify-center space-x-2 shadow-lg"
                 >
-                  <Calendar className="w-5 h-5" />
+                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
                   <span>Book Now</span>
                 </button>
 
-                <div className="mt-4 text-center">
-                  <p className="text-sm text-gray-600">
+                <div className="mt-3 sm:mt-4 text-center">
+                  <p className="text-xs sm:text-sm text-gray-600">
                     Questions?
                     <a
                       href="http://wa.me/201507000720"
