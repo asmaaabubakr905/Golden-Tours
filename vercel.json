@@ -1,6 +1,18 @@
 {
+  "functions": {
+    "api/og.ts": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+    { 
+      "source": "/tour/:slug*",
+      "destination": "/api/og"
+    },
+    { 
+      "source": "/(.*)", 
+      "destination": "/" 
+    }
   ],
   "headers": [
     {
