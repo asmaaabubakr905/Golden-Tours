@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "api/og.ts": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "rewrites": [
     { 
       "source": "/tour/:slug*",
