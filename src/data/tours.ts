@@ -740,7 +740,7 @@ export const tours: Tour[] = [
     title: 'Black & White Desert',
     description: 'Join Golden Tours for an endless adventure – experience the magical contrast of the Black & White Desert, where striking landscapes meet unforgettable desert wonders.',
     image: blackWhiteImg,
-    price: 5500,
+    price: 6200,
     duration: '3 days',
     location: 'Black & White Desert',
     city: 'New Valley',
@@ -748,7 +748,7 @@ export const tours: Tour[] = [
     maxGuests: 20,
     featured: true,
     special: true,
-    tourDate: '5th - 7th Feb ',
+    tourDate: '13th - 15th Feb ',
     itinerary: [
       'Day 1 - ARRIVAL DAY / FARAFRA & DJARA CAVE',
       'Meet at Al-Nour Mosque in Abbasiya at 10:30 PM',

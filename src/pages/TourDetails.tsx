@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, MapPin, Clock, Users, Star, Calendar, CheckCircle, XCircle, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getTourBySlug, getTourSlug } from '../data/tours';
@@ -18,9 +18,6 @@ const TourDetails = () => {
   const [showCelebration, setShowCelebration] = useState(false);
 
   const tour = getTourBySlug(slug || '');
-
-  // Stable review count per tour to avoid changing on re-render
-  const reviewsCount = useMemo(() => Math.floor(Math.random() * 200) + 50, [tour?.id]);
 
   // Redirect legacy / numeric ids to canonical slug URL
   useEffect(() => {
@@ -620,10 +617,6 @@ const TourDetails = () => {
                 </div>
               )} */}
               <div className="flex items-center space-x-1 sm:space-x-2">
-                <Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current flex-shrink-0" />
-                <span>{tour.rating} ({reviewsCount} reviews)</span>
-              </div>
-              <div className="flex items-center space-x-1 sm:space-x-2">
                 <Users className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                 <span>Max {tour.maxGuests}</span>
               </div>
@@ -840,10 +833,6 @@ const TourDetails = () => {
                   <div className="text-2xl sm:text-3xl font-bold text-orange-500 mb-2">
                     {tour.special ? `${tour.price.toLocaleString()} EGP` : `$${tour.price}`}
                     <span className="text-base sm:text-lg font-normal text-gray-500"> /person</span>
-                  </div>
-                  <div className="flex items-center justify-center space-x-1 text-xs sm:text-sm text-gray-600">
-                    <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />
-                    <span>{tour.rating} ({reviewsCount} reviews)</span>
                   </div>
                 </div>
 
