@@ -182,9 +182,13 @@ const TourDetails = () => {
   // Determine OG image based on tour
   // For Black & White Desert tour (id: '15'), use the desert image from public folder
   // For all other tours, use the default image from public folder
-  const ogImage = tour?.id === '15' 
-    ? window.location.origin + '/black-white-desert.jpeg'
-    : window.location.origin + '/og-image.jpeg';
+  const isDesertTour = tour?.id === '15' || 
+                       (tour?.title && tour.title.toLowerCase().includes('black & white desert')) ||
+                       (tour?.title && tour.title.toLowerCase().includes('black and white desert'));
+  
+  const ogImage = isDesertTour && tour
+    ? `${window.location.origin}/black-white-desert.jpeg`
+    : `${window.location.origin}/og-image.jpeg`;
 
   return (
     <div className="bg-white min-h-screen">
