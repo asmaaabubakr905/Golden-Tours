@@ -3,7 +3,6 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, MapPin, Clock, Users, Star, Calendar, CheckCircle, XCircle, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getTourBySlug, getTourSlug } from '../data/tours';
 import { Helmet } from 'react-helmet-async';
-import blackWhiteDesertImg from '../assets/black&white desert.jpeg';
 
 const TourDetails = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -181,10 +180,10 @@ const TourDetails = () => {
   };
 
   // Determine OG image based on tour
-  // For Black & White Desert tour (id: '15'), use the desert image from assets
+  // For Black & White Desert tour (id: '15'), use the desert image from public folder
   // For all other tours, use the default image from public folder
   const ogImage = tour?.id === '15' 
-    ? window.location.origin + blackWhiteDesertImg
+    ? window.location.origin + '/black-white-desert.jpeg'
     : window.location.origin + '/og-image.jpeg';
 
   return (
