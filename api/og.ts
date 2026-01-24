@@ -5,6 +5,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const origin = req.headers.host ? `https://${req.headers.host}` : '';
   const userAgent = req.headers['user-agent'] || '';
   
+  // If this is not a tour page, return 404 to let Vite handle it
+  if (!url.match(/\/tour\//)) {
+    return res.status(404).end();
+  }
+  
   // Check if this is a crawler (Facebook, Twitter, LinkedIn, etc.)
   const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Slackbot|SkypeUriPreview|Applebot|Googlebot|Bingbot|facebook|twitter|linkedin/i.test(userAgent);
   
@@ -97,8 +102,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).setHeader('Content-Type', 'text/html').send(defaultHtml);
   }
   
-  // For regular users, return HTML that will load React app
-  // This is needed because of the rewrite
+  // For regular users on tour pages, we need to redirect to let React app handle it
+  // But since we're using rewrite, we need to return the same HTML structure
+  // The issue is that /src/main.tsx requests might also go through this function
+  // So we need to check if the request is for a static file
+  if (url.includes('/src/') || url.includes('/assets/') || url.includes('/node_modules/')) {
+    // This is a static file request, return 404 to let Vite handle it
+    return res.status(404).end();
+  }
+  
+  // For regular users on tour pages, return HTML that will load React app
   const reactHtml = `<!doctype html>
 <html lang="en">
 <head>
@@ -106,6 +119,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GOLDEN TOURS Tourism Website</title>
+  <meta name="title" content="GOLDEN TOURS Tourism Website" />
+  <meta name="description" content="Discover Egypt's iconic destinations with our curated tours. From pyramids to temples, book your adventure today!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="GOLDEN TOURS Tourism Website" />
+  <meta property="og:description" content="Discover Egypt's iconic destinations with our curated tours. From pyramids to temples, book your adventure today!" />
+  <meta property="og:image" content="${origin}/og-image.jpeg" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="GOLDEN TOURS Tourism Website" />
+  <meta property="twitter:description" content="Discover Egypt's iconic destinations with our curated tours. From pyramids to temples, book your adventure today!" />
+  <meta property="twitter:image" content="${origin}/og-image.jpeg" />
 </head>
 <body>
   <div id="root"></div>

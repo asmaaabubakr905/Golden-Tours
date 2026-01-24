@@ -1,7 +1,7 @@
 {
   "rewrites": [
     { 
-      "source": "/tour/:slug*",
+      "source": "/tour/:slug",
       "destination": "/api/og"
     },
     { 
