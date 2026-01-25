@@ -18,4 +18,8 @@ export default defineConfig({
     },
   },
   base: '/',
+  define: {
+    // Use environment variable or default to production domain
+    __SITE_URL__: JSON.stringify(process.env.VITE_SITE_URL || 'https://goldenphoenixtravel.com'),
+  },
 });
