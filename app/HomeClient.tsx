@@ -1,20 +1,19 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Star, Users, Award, MapPin, Sparkles, Calendar, Clock } from 'lucide-react';
-import { getSpecialTrip, getTourSlug } from '../data/tours';
-import '../swiper-custom.css';
-import 'swiper/css';
-import Testimonials from '../components/Testimonials';
-import FeaturedTours from '../components/FeaturedTours';
-import nubaLuxuryEscapeImg2 from '../assets/nuba luxury escape2.jpeg';
-import nubaLuxuryEscapeImg3 from '../assets/nuba luxury escape3.jfif';
-import nubaLuxuryEscapeImg4 from '../assets/nuba luxury escape4.jfif';
-import { Helmet } from 'react-helmet-async';
-import staticOgImage from '../assets/nuba luxury escape.jpeg';
+'use client';
 
-const Home = () => {
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { ArrowRight, Star, Users, Award, MapPin, Sparkles, Calendar, Clock } from 'lucide-react';
+import { getSpecialTrip, getTourSlug } from '@/data/tours';
+import Testimonials from '@/components/Testimonials';
+import FeaturedTours from '@/components/FeaturedTours';
+import { getImageUrl } from '@/utils/imageUtils';
+import nubaLuxuryEscapeImg2 from '@/src/assets/nuba luxury escape2.jpeg';
+import nubaLuxuryEscapeImg3 from '@/src/assets/nuba luxury escape3.jfif';
+import nubaLuxuryEscapeImg4 from '@/src/assets/nuba luxury escape4.jfif';
+
+export default function HomeClient() {
   const specialTrip = getSpecialTrip();
-  const [currentImage, setCurrentImage] = useState(specialTrip?.image || '');
+  const [currentImage, setCurrentImage] = useState(specialTrip ? getImageUrl(specialTrip.image) : '');
 
   useEffect(() => {
     if (!specialTrip) return;
@@ -22,20 +21,15 @@ const Home = () => {
     let index = 0;
     const interval = setInterval(() => {
       index = (index + 1) % images.length;
-      setCurrentImage(images[index]);
+      setCurrentImage(getImageUrl(images[index]));
     }, 5000);
+    // Set initial image
+    setCurrentImage(getImageUrl(images[0]));
     return () => clearInterval(interval);
   }, [specialTrip]);
 
   return (
     <div className="bg-white">
-      <Helmet>
-        <title>Egypt Tours & Experiences | Golden Tours</title>
-        <meta name="description" content="Embark on unforgettable journeys through Cairo, Alexandria, Luxor, and Aswan. Experience the wonders of pharaohs, temples, and timeless treasures." />
-        <meta property="og:image" content={window.location.origin + staticOgImage} />
-        <meta property="twitter:image" content={window.location.origin + staticOgImage} />
-      </Helmet>
-
       {/* Hero Section */}
       <section className="relative h-screen bg-gradient-to-r from-orange-500 to-orange-600 flex items-center">
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
@@ -57,15 +51,14 @@ const Home = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                to="/tours"
+                href="/tours"
                 className="bg-orange-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition-colors inline-flex items-center justify-center"
               >
                 Explore Tours
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
               <Link
-                to="/tours"
-
+                href="/tours"
                 rel="noopener noreferrer"
                 className="bg-white text-orange-500 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
               >
@@ -75,8 +68,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-
 
       {/* Special Trip Section - Nuba Experience */}
       {specialTrip && (
@@ -186,7 +177,7 @@ const Home = () => {
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4 lg:gap-5">
                     <Link
-                      to={`/tour/${getTourSlug(specialTrip)}`}
+                      href={`/tour/${getTourSlug(specialTrip)}`}
                       className="flex-1 bg-gradient-to-r from-orange-500 to-amber-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:from-orange-600 hover:to-amber-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center space-x-2"
                     >
                       <Calendar className="w-5 h-5" />
@@ -274,7 +265,7 @@ const Home = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/tours"
+              href="/tours"
               className="bg-white text-orange-500 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-100 transition-colors inline-flex items-center justify-center shadow"
             >
               Browse Tours
@@ -293,6 +284,4 @@ const Home = () => {
       </section>
     </div>
   );
-};
-
-export default Home;
+}

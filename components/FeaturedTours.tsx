@@ -1,7 +1,10 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { MapPin, Clock, Users, ArrowRight, Share2, Calendar, Award, Check } from 'lucide-react';
-import { getToursByCity, Tour, getTourSlug } from '../data/tours';
-import { Link } from 'react-router-dom';
+import { getToursByCity, Tour, getTourSlug } from '@/data/tours';
+import Link from 'next/link';
+import { getImageUrl } from '@/utils/imageUtils';
 
 // اختر رحلة واحدة من كل مدينة رئيسية
 const featuredTours: Tour[] = [
@@ -84,7 +87,7 @@ const TourCard = ({ tour }: { tour: Tour }) => {
       {/* Image Section */}
       <div className="relative overflow-hidden h-64">
         <img
-          src={tour.image}
+          src={getImageUrl(tour.image)}
           alt={tour.title}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
@@ -140,7 +143,7 @@ const TourCard = ({ tour }: { tour: Tour }) => {
             <span className="text-sm font-normal text-gray-500"> /person</span>
           </div>
           <Link
-            to={`/tour/${getTourSlug(tour)}`}
+            href={`/tour/${getTourSlug(tour)}`}
             className={`px-6 py-2 rounded-xl font-medium transition-all duration-300 ${isHovered
               ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg scale-105'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -205,8 +208,6 @@ const FeaturedTours = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-
 
   const maxSlide = visibleTours === 1 ? featuredTours.length : featuredTours.length - visibleTours + 1;
   const nextSlide = () => {
@@ -336,18 +337,18 @@ const FeaturedTours = () => {
 
         {/* CTA Button */}
         <div className="text-center">
-          <a
+          <Link
             href="/tours"
             className="bg-gradient-to-r from-orange-500 to-amber-600 text-white px-10 py-4 rounded-2xl text-lg font-semibold hover:from-orange-600 hover:to-amber-700 transition-all duration-300 inline-flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             <Calendar className="mr-3 w-5 h-5" />
             View All Tours
             <ArrowRight className="ml-3 w-5 h-5" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
   );
 };
 
-export default FeaturedTours; 
+export default FeaturedTours;

@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import { Star, Quote } from 'lucide-react';
 
 const reviews = [
