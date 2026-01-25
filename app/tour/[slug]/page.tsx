@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, MapPin, Clock, Users, Star, Calendar, CheckCircle, XCircle, X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { getTourBySlug, getTourSlug } from '../data/tours';
-import { Helmet } from 'react-helmet-async';
+'use client';
 
-const TourDetails = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
+import React, { useState, useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { ArrowLeft, MapPin, Clock, Users, Star, Calendar, CheckCircle, XCircle, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { getTourBySlug, getTourSlug } from '@/data/tours';
+import { getImageUrl } from '@/utils/imageUtils';
+
+export default function TourDetails() {
+  const params = useParams();
+  const router = useRouter();
+  const slug = params?.slug as string;
   const [activeTab, setActiveTab] = useState('overview');
   const [showModal, setShowModal] = useState(false);
   const [form, setForm] = useState({ name: '', phone: '', guests: '1', date: '' });
@@ -23,9 +27,9 @@ const TourDetails = () => {
     if (!tour) return;
     const canonical = getTourSlug(tour);
     if (slug !== canonical) {
-      navigate(`/tour/${canonical}`, { replace: true });
+      router.replace(`/tour/${canonical}`);
     }
-  }, [slug, tour?.id, navigate]);
+  }, [slug, tour?.id, router]);
 
   // Default tab: open itinerary first for special trips (e.g., New Year), otherwise overview
   useEffect(() => {
@@ -71,7 +75,7 @@ const TourDetails = () => {
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Tour Not Found</h1>
           <p className="text-gray-600 mb-8">The tour you're looking for doesn't exist.</p>
           <Link
-            to="/tours"
+            href="/tours"
             className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors"
           >
             Back to Tours
@@ -179,38 +183,8 @@ const TourDetails = () => {
     }
   };
 
-  // Determine OG image based on tour
-  // For Black & White Desert tour (id: '15'), use the desert image from public folder
-  // For all other tours, use the default image from public folder
-  const isDesertTour = tour?.id === '15' || 
-                       (tour?.title && tour.title.toLowerCase().includes('black & white desert')) ||
-                       (tour?.title && tour.title.toLowerCase().includes('black and white desert'));
-  
-  const ogImage = isDesertTour && tour
-    ? `${window.location.origin}/black-white-desert.jpeg`
-    : `${window.location.origin}/og-image.jpeg`;
-
   return (
     <div className="bg-white min-h-screen">
-      {tour && (
-        <Helmet>
-          <title>{tour.title} | Golden Tours</title>
-          <meta name="description" content={tour.description} />
-
-          {/* Open Graph / Facebook */}
-          <meta property="og:type" content="website" />
-          <meta property="og:title" content={tour.title} />
-          <meta property="og:description" content={tour.description} />
-          <meta property="og:image" content={ogImage} />
-
-          {/* Twitter */}
-          <meta property="twitter:card" content="summary_large_image" />
-          <meta property="twitter:title" content={tour.title} />
-          <meta property="twitter:description" content={tour.description} />
-          <meta property="twitter:image" content={ogImage} />
-        </Helmet>
-      )}
-
       {/* New Year Celebration Overlay (shows once on load for New Year trips only) */}
       {showCelebration && tour?.isNewYear && (
         <div className="fixed inset-0 z-40 pointer-events-none overflow-hidden">
@@ -368,7 +342,7 @@ const TourDetails = () => {
             {selectedImageIndex !== null && (
               <>
                 <img
-                  src={tour.galleryImages[selectedImageIndex]}
+                  src={getImageUrl(tour.galleryImages[selectedImageIndex])}
                   alt={`${tour.title} - Image ${selectedImageIndex + 1}`}
                   className="max-w-full max-h-full object-contain rounded-lg"
                 />
@@ -596,7 +570,7 @@ const TourDetails = () => {
       {/* Hero Section */}
       <section className="relative h-64 sm:h-80 md:h-96 bg-gray-900 rounded-b-3xl overflow-hidden shadow-xl">
         <img
-          src={tour.image}
+          src={getImageUrl(tour.image)}
           alt={tour.title}
           className="w-full h-full object-cover rounded-b-3xl"
         />
@@ -604,7 +578,7 @@ const TourDetails = () => {
         <div className="absolute inset-0 flex items-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <Link
-              to={`/tours?city=${encodeURIComponent(tour.city)}`}
+              href={`/tours?city=${encodeURIComponent(tour.city)}`}
               className="inline-flex items-center text-white hover:text-orange-300 transition-colors mb-3 sm:mb-4 drop-shadow-lg text-sm sm:text-base"
             >
               <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
@@ -620,12 +594,6 @@ const TourDetails = () => {
                 <Clock className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                 <span>{tour.duration}</span>
               </div>
-              {/* {tour.tourDate && (
-                <div className="flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">
-                  <Calendar className="w-5 h-5" />
-                  <span className="font-semibold">{tour.tourDate}</span>
-                </div>
-              )} */}
               <div className="flex items-center space-x-1 sm:space-x-2">
                 <Users className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                 <span>Max {tour.maxGuests}</span>
@@ -688,7 +656,7 @@ const TourDetails = () => {
                         className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group hover:scale-105 transition-transform duration-300 shadow-md hover:shadow-xl"
                       >
                         <img
-                          src={img}
+                          src={getImageUrl(img)}
                           alt={`${tour.title} - Image ${index + 1}`}
                           className="w-full h-full object-cover group-hover:brightness-110 transition-all duration-300"
                         />
@@ -895,6 +863,4 @@ const TourDetails = () => {
       </section>
     </div>
   );
-};
-
-export default TourDetails;
+}

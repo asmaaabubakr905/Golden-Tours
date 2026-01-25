@@ -1,42 +1,44 @@
-import img1 from '../assets/abusimble aswan main image.jpg';
-import img2 from '../assets/falouka aswan.jpg';
-import img3 from '../assets/nubian-village.jpg';
-import img4 from '../assets/philae-temple,-philae-island.jpg';
-import img5 from '../assets/high-dam-aswan-webp.webp';
-import img6 from '../assets/Temple-of-Queen-Hatshepsut-1024x683.png';
-import img7 from '../assets/273ae4b9-62f0-4fa2-a7a5-9b32d249b74a_karnak-temple-entry-tickets.png';
-import img8 from '../assets/alex.jpeg';
-import img9 from '../assets/Egyptian-Museum-and-Old-Cairo-TOur-1.webp';
-import img10 from '../assets/pyramids.jpg';
-import img11 from '../assets/fluca luxor.jpg';
-import nubaImg from '../assets/Nuba.jpg';
-import nubaNewYearsImg from '../assets/31DEC.png';
-import nubaLuxuryEscapeImg from '../assets/nuba luxury escape.jpeg';
-import blackWhiteImg from '../assets/black&white desert.jpeg';
-import galleryImg1 from '../assets/1.jfif';
-import galleryImg2 from '../assets/2.jpg';
-import galleryImg3 from '../assets/3.jpg';
-import galleryImg5 from '../assets/5.jpg';
-import galleryImg6 from '../assets/6.jpg';
-import galleryImg7 from '../assets/7.jpg';
-import galleryImg8 from '../assets/8.jpg';
-import galleryImg9 from '../assets/9.jfif';
-import galleryImg10 from '../assets/10.jpg';
-import galleryImg11 from '../assets/11.jpg';
-import galleryImg12 from '../assets/12.jpg';
-import galleryImg13 from '../assets/13 (1).jfif';
-import galleryImg14 from '../assets/14.jfif';
-import galleryImg15 from '../assets/15.jfif';
-import galleryImg16 from '../assets/16.jfif';
-import galleryImg17 from '../assets/17.jfif';
-import galleryImg18 from '../assets/18.jfif';
-import galleryImg19 from '../assets/19.jfif';
+import img1 from '@/src/assets/abusimble aswan main image.jpg';
+import img2 from '@/src/assets/falouka aswan.jpg';
+import img3 from '@/src/assets/nubian-village.jpg';
+import img4 from '@/src/assets/philae-temple,-philae-island.jpg';
+import img5 from '@/src/assets/high-dam-aswan-webp.webp';
+import img6 from '@/src/assets/Temple-of-Queen-Hatshepsut-1024x683.png';
+import img7 from '@/src/assets/273ae4b9-62f0-4fa2-a7a5-9b32d249b74a_karnak-temple-entry-tickets.png';
+import img8 from '@/src/assets/alex.jpeg';
+import img9 from '@/src/assets/Egyptian-Museum-and-Old-Cairo-TOur-1.webp';
+import img10 from '@/src/assets/pyramids.jpg';
+import img11 from '@/src/assets/fluca luxor.jpg';
+import nubaImg from '@/src/assets/Nuba.jpg';
+import nubaNewYearsImg from '@/src/assets/31DEC.png';
+import nubaLuxuryEscapeImg from '@/src/assets/nuba luxury escape.jpeg';
+import blackWhiteImg from '@/src/assets/black&white desert.jpeg';
+import galleryImg1 from '@/src/assets/1.jfif';
+import galleryImg2 from '@/src/assets/2.jpg';
+import galleryImg3 from '@/src/assets/3.jpg';
+import galleryImg5 from '@/src/assets/5.jpg';
+import galleryImg6 from '@/src/assets/6.jpg';
+import galleryImg7 from '@/src/assets/7.jpg';
+import galleryImg8 from '@/src/assets/8.jpg';
+import galleryImg9 from '@/src/assets/9.jfif';
+import galleryImg10 from '@/src/assets/10.jpg';
+import galleryImg11 from '@/src/assets/11.jpg';
+import galleryImg12 from '@/src/assets/12.jpg';
+import galleryImg13 from '@/src/assets/13 (1).jfif';
+import galleryImg14 from '@/src/assets/14.jfif';
+import galleryImg15 from '@/src/assets/15.jfif';
+import galleryImg16 from '@/src/assets/16.jfif';
+import galleryImg17 from '@/src/assets/17.jfif';
+import galleryImg18 from '@/src/assets/18.jfif';
+import galleryImg19 from '@/src/assets/19.jfif';
+import type { StaticImageData } from 'next/image';
+
 export interface Tour {
   id: string;
   slug?: string;
   title: string;
   description: string;
-  image: string;
+  image: string | StaticImageData | any;
   price: number;
   duration: string;
   location: string;
@@ -51,7 +53,7 @@ export interface Tour {
   includes: string[];
   excludes: string[];
   fullDescription: string;
-  galleryImages?: string[];
+  galleryImages?: (string | StaticImageData | any)[];
 }
 
 const slugify = (value: string) =>
@@ -761,7 +763,7 @@ export const tours: Tour[] = [
       '',
       'Day 2 - CANYONS, SPRINGS & STARS',
       'Enjoy breakfast at the camp',
-      '4x4 desert adventure through Wadi Al-Aqabat, Bride’s Hand Rock, Wadi Hannes, Ain El-Serw, Ain Khadra, and the White House area',
+      '4x4 desert adventure through Wadi Al-Aqabat, Brides Hand Rock, Wadi Hannes, Ain El-Serw, Ain Khadra, and the White House area',
       'Have lunch at a scenic desert spot',
       'Explore the formations of the White Desert (Mushroom, Chicken, Rabbit, Horse, and Fox House)',
       'Watch sunset and return to camp for Bedouin dinner',

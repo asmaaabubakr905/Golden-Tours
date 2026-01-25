@@ -1,7 +1,9 @@
+'use client';
+
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, Facebook, Instagram, MessageCircle, Sparkles, ArrowRight, Globe, Shield, Heart } from 'lucide-react';
 
-const Contact = () => {
+export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -305,6 +307,4 @@ Message: ${formData.message}`;
       </section>
     </div>
   );
-};
-
-export default Contact;
+}

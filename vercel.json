@@ -1,14 +1,4 @@
 {
-  "rewrites": [
-    { 
-      "source": "/tour/:slug",
-      "destination": "/api/og"
-    },
-    { 
-      "source": "/(.*)", 
-      "destination": "/" 
-    }
-  ],
   "headers": [
     {
       "source": "/assets/(.*)",
@@ -19,7 +9,5 @@
         }
       ]
     }
-  ],
-  "cleanUrls": false,
-  "trailingSlash": false
+  ]
 }

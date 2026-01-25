@@ -1,6 +1,10 @@
+'use client';
+
 import React, { useState } from 'react';
 import { MapPin, Clock, Users, Share2, ArrowRight, Sparkles, Check } from 'lucide-react';
-import { getTourSlug, Tour } from '../data/tours';
+import { getTourSlug, Tour } from '@/data/tours';
+import Link from 'next/link';
+import { getImageUrl } from '@/utils/imageUtils';
 
 interface TourCardProps {
   tour: Tour;
@@ -81,12 +85,10 @@ const TourCard: React.FC<TourCardProps> = ({ tour }) => {
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10"></div>
         <img
-          src={tour.image}
+          src={getImageUrl(tour.image)}
           alt={tour.title}
           className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
         />
-
-
 
         {/* Price Badge */}
         <div className="absolute bottom-4 right-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-2xl px-4 py-2 shadow-lg z-20">
@@ -132,7 +134,7 @@ const TourCard: React.FC<TourCardProps> = ({ tour }) => {
         </div>
 
         {/* Action Button */}
-        <a
+        <Link
           href={`/tour/${getTourSlug(tour)}`}
           className="group/btn relative w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 px-6 rounded-2xl font-bold text-center hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center space-x-2 no-underline"
         >
@@ -141,7 +143,7 @@ const TourCard: React.FC<TourCardProps> = ({ tour }) => {
 
           {/* Button Glow Effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-500 rounded-2xl blur opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300 -z-10"></div>
-        </a>
+        </Link>
       </div>
 
       {/* Decorative Elements */}

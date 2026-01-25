@@ -1,9 +1,12 @@
+'use client';
+
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { FaHome, FaCompass, FaEnvelope } from 'react-icons/fa';
 
 const BottomNav = () => {
-  const location = useLocation();
+  const pathname = usePathname();
 
   const navItems = [
     { name: 'Home', href: '/', icon: FaHome },
@@ -11,7 +14,7 @@ const BottomNav = () => {
     { name: 'Contact', href: '/contact', icon: FaEnvelope },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => pathname === path;
 
   return (
     <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-40">
@@ -21,7 +24,7 @@ const BottomNav = () => {
           return (
             <Link
               key={item.name}
-              to={item.href}
+              href={item.href}
               className={`flex-1 flex flex-col items-center justify-center py-3 px-2 transition-colors ${
                 isActive(item.href)
                   ? 'text-orange-500 bg-orange-50'

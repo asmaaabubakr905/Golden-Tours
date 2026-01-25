@@ -1,6 +1,10 @@
+'use client';
+
 import React from 'react';
+import Link from 'next/link';
 import { MapPin, Phone, Mail, Facebook, Instagram } from 'lucide-react';
-import logo from '../assets/Logoo2.png';
+import logo from '@/src/assets/Logoo2.png';
+import { getImageUrl } from '@/utils/imageUtils';
 
 const Footer = () => {
   return (
@@ -11,7 +15,7 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
                <div className="w-20 h-20 rounded-full flex items-center justify-center">
-              <img src={logo} alt="Golden tours Tours Logo" className="w-full h-full object-contain" />
+              <img src={getImageUrl(logo)} alt="Golden tours Tours Logo" className="w-full h-full object-contain" />
             </div>
               <div>
                 <div className="text-xl font-bold">GOLDEN TOURS</div>
@@ -47,9 +51,9 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="/" className="text-gray-300 hover:text-white transition-colors">Home</a></li>
-              <li><a href="/tours" className="text-gray-300 hover:text-white transition-colors">Tours</a></li>
-              <li><a href="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+              <li><Link href="/" className="text-gray-300 hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/tours" className="text-gray-300 hover:text-white transition-colors">Tours</Link></li>
+              <li><Link href="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link></li>
               <li><a href="http://wa.me/201507000720" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">Book Now</a></li>
             </ul>
           </div>

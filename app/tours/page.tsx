@@ -1,26 +1,26 @@
+'use client';
+
 import { useState, useMemo, useEffect } from 'react';
 import { Filter, Search, MapPin, Heart, ArrowRight, Sparkles } from 'lucide-react';
-import TourCard from '../components/TourCard';
-import { cities, getToursByCity } from '../data/tours';
-import { useLocation } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import staticOgImage from '../assets/nuba luxury escape.jpeg';
+import TourCard from '@/components/TourCard';
+import { cities, getToursByCity } from '@/data/tours';
+import { useSearchParams } from 'next/navigation';
 
-const Tours = () => {
-  const location = useLocation();
+export default function Tours() {
+  const searchParams = useSearchParams();
   const getInitialCity = () => {
-    const params = new URLSearchParams(location.search);
-    const city = params.get('city');
+    if (!searchParams) return 'All';
+    const city = searchParams.get('city');
     return city && cities.includes(city) ? city : 'All';
   };
   const [selectedCity, setSelectedCity] = useState(getInitialCity());
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const city = params.get('city');
+    if (!searchParams) return;
+    const city = searchParams.get('city');
     if (city && cities.includes(city)) {
       setSelectedCity(city);
     }
-  }, [location.search]);
+  }, [searchParams]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -36,13 +36,6 @@ const Tours = () => {
 
   return (
     <div className="bg-gradient-to-br from-orange-50 via-white to-amber-50 min-h-screen">
-      <Helmet>
-        <title>Egypt Tours & Experiences | Golden Tours</title>
-        <meta name="description" content="Discover Egypt's iconic destinations with our curated tours. From pyramids to temples, book your adventure today!" />
-        <meta property="og:image" content={window.location.origin + staticOgImage} />
-        <meta property="twitter:image" content={window.location.origin + staticOgImage} />
-      </Helmet>
-
       {/* Enhanced Header with Animation */}
       <section className="relative bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-white py-20 mt-16 overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
@@ -236,6 +229,4 @@ const Tours = () => {
       </section>
     </div>
   );
-};
-
-export default Tours;
+}
